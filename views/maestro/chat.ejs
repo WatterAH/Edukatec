@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+</head>
+
+<body>
+    <h3>Usuario: <%= name %>
+    </h3>
+    <input type="text" id="mensaje" placeholder="Mensaje" required="">
+    <button id="enviar">Enviar</button>
+
+    <p>
+    <div id="notificaciones"></div>
+    </p>
+
+    <p>
+    <div id="salida">
+        <div id="avisos"></div>
+    </div>
+    </p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io()
+        var list = document.querySelector('#not')
+
+        //Elementos de HTML
+        let mensaje = document.getElementById('mensaje')
+        let usuario = '<%= name %>'
+        let salida = document.getElementById('salida')
+        let notificaciones = document.getElementById('notificaciones')
+        let boton = document.getElementById('enviar')
+
+        var clientes = []
+
+        boton.addEventListener('click', function () {
+            var data = {
+                mensaje: mensaje.value,
+                usuario: '<%= name %>'
+            }
+            socket.emit('chat:mensaje', data)
+            mensaje.value = ''
+        })
+
+        mensaje.addEventListener('keypress', function () {
+            socket.emit('chat:escribiendo', '<%= name %>')
+        })
+
+        socket.on('chat:mensaje', function (data) {
+            salida.innerHTML +=
+                '<b>' + data.usuario + '</b>: ' + data.mensaje + '<br>'
+            avisos.innerHTML = ''
+        })
+
+        socket.on('chat:escribiendo', function (data) {
+            avisos.innerHTML = '<p><b><em>' + data + '</em> está escribiendo...</b></p>'
+        })
+
+        socket.on('socket_desconectado', function (data) {
+            console.log(data)
+            clientes = clientes.filter(function (cliente) {
+                console.log(cliente)
+                return cliente.id != data.id
+            })
+        })
+
+        socket.on('socket_conectado', function (data) {
+            console.log(data)
+            notificaciones.innerHTML += JSON.stringify(data)
+        })
+    </script>
+</body>
+
+</html>

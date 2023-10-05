@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Minerva | Inicio de sesión</title>
+    <style>
+      body {
+        background-color: #bbe5e3;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23f4bd61' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23b92327' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23f5af61' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23c42d2d' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23f6a160' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23ce3733' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23f69260' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23d94139' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23f7845f' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23e34b3f' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23f8765f' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23ee5545' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+      }
+
+      .bg-card {
+        background-color: #eed7c5;
+      }
+    </style>
+    <title>Edukatec | Inicio de sesión</title>
+  </head>
+
+  <body>
+    <br />
+    <div data-aos="fade-right" data-aos-duration="1800" class="text-center">
+      <a href="/"><img src="img/logo.png" width="10%" /></a>
+    </div>
+    <div
+      data-aos="fade-right"
+      data-aos-duration="2000"
+      class="container my-auto"
+    >
+      <div class="row">
+        <div class="col-xs-1 col-md-2 col-lg-3"></div>
+        <div class="col-xs-10 col-md-8 col-lg-6">
+          <div class="row">
+            <div class="col-xs-0 col-lg-1"></div>
+            <div class="col-xs-12 col-lg-10">
+              <div class="card mb-3">
+                <div class="row">
+                  <div class="col-2"></div>
+                  <div class="col-8 card-body">
+                    <br />
+                    <h4 class="card-title text-center">Inicio de sesión</h4>
+                    <p class="card-text"></p>
+                    <form action="/auth" method="post">
+                      <fieldset>
+                        <div class="form-group">
+                          <label class="form-label mt-4" for="mail"
+                            >Correo electronico</label
+                          >
+                          <input
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'mail') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="mail"
+                            name="mail"
+                            placeholder="alguien@ejemplo.com"
+                            value="<% if (typeof validaciones !='undefined' ) {%><%= valores.mail %><%}%>"
+                          />
+                        </div>
+                        <div class="form-group has-danger">
+                          <label for="pass" class="form-label mt-4"
+                            >Contraseña</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'mail') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="pass"
+                            aria-describedby="passHelp"
+                            name="pass"
+                            placeholder="Contraseña"
+                          />
+                          <% if (typeof error != 'undefined') { %>
+                          <small class="text-danger"> <%= error %> </small>
+                          <% } else { %>
+                          <small id="passHelp" class="form-text text-muted">
+                            Nunca compartiremos tu contraseña
+                          </small>
+                          <% } %>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-primary float-end">
+                          Enviar
+                        </button>
+                      </fieldset>
+                    </form>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                      <ul class="list-unstyled">
+                        <li class="float-end fs-6">
+                          <a href="register">Registrate</a>
+                        </li>
+                        <li class="fs-6">
+                          <a href="forgotpass">Olvidé mi contraseña</a>
+                        </li>
+                      </ul>
+                      <br />
+                    </div>
+                    <div class="col-1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex-container fixed-bottom mb-3 ms-5"
+      data-aos="fade-right"
+      data-aos-duration="1800"
+    >
+      <% if (typeof validaciones !='undefined' ) { %> <% validaciones.forEach
+      ((id)=> { %>
+      <p></p>
+      <div class="row">
+        <div
+          class="toast show"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div class="toast-header">
+            <strong class="me-auto">¡Atención!</strong>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="toast-body"><%= id.msg %></div>
+        </div>
+      </div>
+      <% }) %> <% } %>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Visualizar cuenta (para todos)-->
+    <title>Minerva | Mi cuenta</title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <h1>Bienvenid@ <%= data.name %></h1>
+      <div class="row">
+        <div class="col-12 col-lg-8 mt-5">
+          <div class="card bg-light mb-4">
+            <p class="card-text p-3 fs-5 ms-3">
+              <b>NOMBRE: </b> <%= data.name %> <%= data.lastname %>
+            </p>
+          </div>
+          <div class="card bg-light my-4">
+            <p class="card-text p-3 fs-5 ms-3">
+              <b>CORREO ELECTRÓNICO:</b> <%= data.mail %>
+            </p>
+          </div>
+          <div class="card bg-light my-4">
+            <p class="card-text p-3 fs-5 ms-3">
+              <b>TIPO DE CUENTA: </b> <%= (data.type == 1) ? "General" :
+              (data.type == 2) ? "Ingles" : "Educación Fisica" %>
+            </p>
+          </div>
+          <button
+            class="btn btn-info ms-5 ms-md-0 mt-3 fs-5"
+            onclick="changePass()"
+          >
+            CAMBIAR CONTRASEÑA
+          </button>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/maestro/myacc.js"></script>
+  </body>
+</html>

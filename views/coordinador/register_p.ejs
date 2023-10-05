@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <title>Minerva | <%= texts.create.parent.crearP %></title>
+    <%- include('links.ejs') %>
+  </head>
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="card mx-4">
+            <h3 class="card-header text-center">
+              <%= texts.create.parent.crearP %>
+            </h3>
+            <div class="card-text form-group mx-5 mt-2">
+              <form class="form-group" action="register_p" method="post">
+                <label class="form-label" for="pmail">
+                  <%= texts.create.teacher.mail %>
+                </label>
+                <input
+                  class="form-control mb-4 <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'mail') { %> is-invalid <% } %> <% }) %> <% } %>"
+                  name="mail"
+                  id="tmail"
+                  value="<% if (typeof validaciones != 'undefined') { %><%= valores.mail %><% } %>"
+                />
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="palumnos">
+                      <%= texts.create.parent.hijos %>
+                    </label>
+                    <select
+                      class="form-select mb-4 <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'hijos') { %> is-invalid <% } %> <% }) %> <% } %>"
+                      id="alumno"
+                      name="hijos[]"
+                      multiple
+                    >
+                      <% for(i=0; i < alumnos.length; i++) { %>
+                      <option value="<%= alumnos[i].id %>">
+                        <%= alumnos[i].name %> <%= alumnos[i].spaterno %>
+                      </option>
+                      <% } %>
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="pgrupo"> <%= texts.create.grupo %> </label>
+                    <select class="form-select mb-4" id="grupos">
+                      <% for(i=0; i < grupos.length; i++) { %>
+                      <option value="<%= grupos[i].id %>">
+                        <%= grupos[i].name %>
+                      </option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-success float-end mb-4">Enviar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script src="js/maestro/grupos.js"></script>
+    <script>
+      document.querySelector('a[id="nav-crear"]').classList.add("active");
+    </script>
+  </body>
+</html>

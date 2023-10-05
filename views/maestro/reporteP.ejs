@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Formulario para realizar las 3 evaluaciones: evalu permanentes, reportes parcial y reporte adicional-->
+    <title>Minerva | Reporte parcial</title>
+    <%- include('links.ejs') %>
+    <style>
+      .notes {
+        resize: none;
+      }
+
+      .btn-gpt {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.275rem 0rem;
+        background-color: #0f9e7b;
+        color: #fff;
+        border: 1px;
+        border-color: transparent;
+        border-radius: 0.375rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="recuperar" action="recuperar" method="post">
+      <input name="id" id="id" />
+    </form>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="card mb-3 mt-2">
+            <form action="/reporteP" method="post">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-6">
+                    <h3>Reporte parcial</h3>
+                    <strong id="accepted"></strong>
+                  </div>
+                  <div class="col-3 form-group">
+                    <select class="form-select" id="grupos">
+                      <option value="">Grupos</option>
+                      <% grupos.forEach((grupo) => { %>
+                      <option value="<%= grupo.id %>"><%= grupo.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+                  <div class="col-3 form-group">
+                    <select
+                      class="form-select <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'alumno') { %> is-invalid <% } %> <% }) %> <% } %>"
+                      name="alumno"
+                      id="alumno"
+                    >
+                      <option value="">Alumno</option>
+                      <% for (i=0; i < alumnos.length; i++) { %>
+                      <option value="<%= alumnos[i].id %>">
+                        <%= alumnos[i].name %> <%= alumnos[i].spaterno %>
+                      </option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-text mx-5">
+                <% if (type == 1) { %>
+                <div class="form-group">
+                  <label for="notes1" class="form-label mt-4"
+                    >Lenguaje y comunicación</label
+                  >
+                  <div class="row">
+                    <div class="col-11">
+                      <textarea
+                        class="form-control notes <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'notesp1') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="notesp1"
+                        id="notes1"
+                        rows="6"
+                      ></textarea>
+                    </div>
+                    <div class="col-1">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item dropdown btn-gpt">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspop="true"
+                            aria-expanded="false"
+                            href="#"
+                          >
+                            <span
+                              ><img
+                                src="img/gpt.png"
+                                width="20px"
+                                height="20px"
+                            /></span>
+                          </a>
+                          <div class="dropdown-menu">
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="revisar(1)"
+                            >
+                              Revisar
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="reducir(1)"
+                            >
+                              Reducir
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="deshacer(1)"
+                            >
+                              Deshacer
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="notes2" class="form-label mt-4"
+                    >Pensamiento matemático</label
+                  >
+                  <div class="row">
+                    <div class="col-11">
+                      <textarea
+                        class="form-control notes <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'notesp2') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="notesp2"
+                        id="notes2"
+                        rows="6"
+                      ></textarea>
+                    </div>
+                    <div class="col-1">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item dropdown btn-gpt">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspop="true"
+                            aria-expanded="false"
+                            href="#"
+                          >
+                            <span
+                              ><img
+                                src="img/gpt.png"
+                                width="20px"
+                                height="20px"
+                            /></span>
+                          </a>
+                          <div class="dropdown-menu">
+                            <button
+                              class="dropdown-item-gpt"
+                              onclick="revisar(2)"
+                              type="button"
+                            >
+                              Revisar
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="reducir(2)"
+                            >
+                              Reducir
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="deshacer(2)"
+                            >
+                              Deshacer
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="notes3" class="form-label mt-4"
+                    >Exploración y comprensión del mundo natural y social</label
+                  >
+                  <div class="row">
+                    <div class="col-11">
+                      <textarea
+                        class="form-control notes <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'notesp3') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="notesp3"
+                        id="notes3"
+                        rows="6"
+                      ></textarea>
+                    </div>
+                    <div class="col-1">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item dropdown btn-gpt">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspop="true"
+                            aria-expanded="false"
+                            href="#"
+                          >
+                            <span
+                              ><img
+                                src="img/gpt.png"
+                                width="20px"
+                                height="20px"
+                            /></span>
+                          </a>
+                          <div class="dropdown-menu">
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="revisar(3)"
+                            >
+                              Revisar
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="reducir(3)"
+                            >
+                              Reducir
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="deshacer(3)"
+                            >
+                              Deshacer
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="notes4" class="form-label mt-4">Artes</label>
+                  <div class="row">
+                    <div class="col-11">
+                      <textarea
+                        class="form-control notes <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'notesp4') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="notesp4"
+                        id="notes4"
+                        rows="6"
+                      ></textarea>
+                    </div>
+                    <div class="col-1">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item dropdown btn-gpt">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspop="true"
+                            aria-expanded="false"
+                            href="#"
+                          >
+                            <span
+                              ><img
+                                src="img/gpt.png"
+                                width="20px"
+                                height="20px"
+                            /></span>
+                          </a>
+                          <div class="dropdown-menu">
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="revisar(4)"
+                            >
+                              Revisar
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="reducir(4)"
+                            >
+                              Reducir
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="deshacer(4)"
+                            >
+                              Deshacer
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <% } else if (type == 2) { %>
+                <div class="form-group">
+                  <label for="notes5" class="form-label mt-4">Ingles</label>
+                  <div class="row">
+                    <div class="col-11">
+                      <textarea
+                        class="form-control notes <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'notesp5') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="notesp5"
+                        id="notes5"
+                        rows="6"
+                      ></textarea>
+                    </div>
+                    <div class="col-1">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item dropdown btn-gpt">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspop="true"
+                            aria-expanded="false"
+                            href="#"
+                          >
+                            <span
+                              ><img
+                                src="img/gpt.png"
+                                width="20px"
+                                height="20px"
+                            /></span>
+                          </a>
+                          <div class="dropdown-menu">
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="revisar(5)"
+                            >
+                              Revisar
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="reducir(5)"
+                            >
+                              Reducir
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="deshacer(5)"
+                            >
+                              Deshacer
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <% } else if (type == 3) { %>
+                <div class="form-group">
+                  <label for="notes6" class="form-label mt-4"
+                    >Educación física</label
+                  >
+                  <div class="row">
+                    <div class="col-11">
+                      <textarea
+                        class="form-control notes <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'notesp6') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="notesp6"
+                        id="notes6"
+                        rows="6"
+                      ></textarea>
+                    </div>
+                    <div class="col-1">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item dropdown btn-gpt">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspop="true"
+                            aria-expanded="false"
+                            href="#"
+                          >
+                            <span
+                              ><img
+                                src="img/gpt.png"
+                                width="20px"
+                                height="20px"
+                            /></span>
+                          </a>
+                          <div class="dropdown-menu">
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="revisar(6)"
+                            >
+                              Revisar
+                            </button>
+                            <button
+                              class="rev dropdown-item-gpt"
+                              type="button"
+                              onclick="reducir(6)"
+                            >
+                              Reducir
+                            </button>
+                            <button
+                              class="dropdown-item-gpt"
+                              type="button"
+                              onclick="deshacer(6)"
+                            >
+                              Deshacer
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <br />
+                <!--debe llenar el titulo o anotación para elegir nivel-->
+                <button type="submit" class="btn btn-info float-end" id="send">
+                  ENVIAR
+                </button>
+                <p><br /><br /></p>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-4 mt-4">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Comentarios</h4>
+            </div>
+            <div class="card-text form-group m-3">
+              <div class="input-group">
+                <input
+                  id="comentario"
+                  type="text"
+                  class="form-control"
+                  placeholder="Comentario privado"
+                  aria-label="Comentario privado"
+                  aria-describedby="comentar"
+                />
+                <button class="btn btn-info" type="button" id="comentar">
+                  Enviar
+                </button>
+              </div>
+              <hr />
+              <div class="row">
+                <!-- <div class="col-2 d-flex">
+                  <img
+                    width="48x"
+                    height="48px"
+                    class="justify-content-center"
+                  />
+                </div> -->
+                <div class="col-10" id="comments">
+                  Seleccione un alumno para ver los comentarios
+                  <!-- <b>Nombre</b> <small class="text-muted">21-abr</small><br />
+                  <p>Comentario</p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="table"
+      data-Report="<%= table_report %>"
+      data-Eval="<%= table_eval %>"
+    ></div>
+    <%- include('scripts') %>
+    <script src="js/maestro/recRep.js"></script>
+    <script src="js/maestro/gpt.js"></script>
+    <script src="js/maestro/comment.js"></script>
+    <script src="js/maestro/mostrar.js"></script>
+    <script src="js/maestro/grupos.js"></script>
+  </body>
+</html>

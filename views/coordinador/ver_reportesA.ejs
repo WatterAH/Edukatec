@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Visualizar registos-->
+    <title>Minerva | <%= texts.view.adicionales %></title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-lg-9 row">
+          <h1 class="col-9 col-sm-7 mt-2 mt-sm-0">
+            <%= texts.view.adicional %>
+          </h1>
+          <div class="col-3 float-end col-sm-4 mt-2">
+            <div class="float-end" id="accepted"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <br />
+          <div class="card mb-3">
+            <h3 class="card-header text-center">
+              <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                  <select class="form-select" id="ciclo"></select>
+                </div>
+                <div class="col-sm-6 col-lg-3 mt-2 mt-sm-0">
+                  <select class="form-select" id="periodo">
+                    <% for(i=1; i <=5; i++) { %>
+                    <option value="<%= i %>">Periodo <%= i %></option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-lg-3 mt-2 mt-lg-0">
+                  <select class="form-select" id="grupo">
+                    <option value=""><%= texts.view.grupos %></option>
+                    <% grupos.forEach((grupo)=> { %>
+                    <option value="<%= grupo.id %>"><%= grupo.name %></option>
+                    <% }) %>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-lg-3 mt-2 mt-lg-0">
+                  <select class="form-select" id="alumno">
+                    <option value=""><%= texts.view.alumno %></option>
+                    <% alumnos.forEach((alumno)=> { %>
+                    <option value="<%= alumno.id %>">
+                      <%= alumno.name %> <%= alumno.spaterno %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+            </h3>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h4 class="card-title"><%= texts.view.mat1 %></h4>
+                <p class="notes card-text ms-3 me-3 mt-2 mb-2" id="notes1">
+                  Selecciona un alumno, ¡si hay información aquí aparecerá su
+                  desempeño!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <h4 class="card-title"><%= texts.view.mat2 %></h4>
+                <p class="notes card-text ms-3 me-3 mt-2 mb-2" id="notes2">
+                  Selecciona un alumno, ¡si hay información aquí aparecerá su
+                  desempeño!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <h4 class="card-title"><%= texts.view.mat3 %></h4>
+                <p class="notes card-text ms-3 me-3 mt-2 mb-2" id="notes3">
+                  Selecciona un alumno, ¡si hay información aquí aparecerá su
+                  desempeño!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <h4 class="card-title"><%= texts.view.mat4 %></h4>
+                <p class="notes card-text ms-3 me-3 mt-2 mb-2" id="notes4">
+                  Selecciona un alumno, ¡si hay información aquí aparecerá su
+                  desempeño!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <h4 class="card-title"><%= texts.view.mat6 %></h4>
+                <p class="notes card-text ms-3 me-3 mt-2 mb-2" id="notes5">
+                  Selecciona un alumno, ¡si hay información aquí aparecerá su
+                  desempeño!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <h4 class="card-title"><%= texts.view.mat5 %></h4>
+                <p class="notes card-text ms-3 me-3 mt-2 mb-2" id="notes6">
+                  Selecciona un alumno, ¡si hay información aquí aparecerá su
+                  desempeño!
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 mt-4">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-xl-6 text-sm-center">
+                  <h5 class="card-title mt-2"><%= texts.view.comentarios %></h5>
+                </div>
+                <!-- <div class="col-sm-2 col-xl-0"></div> -->
+                <div class="col-sm-12 col-xl-6">
+                  <select class="form-select" id="maestros">
+                    <option><%= texts.create.maestro %></option>
+                  </select>
+                </div>
+                <div class="col-sm-2 col-xl-0"></div>
+              </div>
+            </div>
+            <div class="card-text form-group m-3">
+              <div class="input-group">
+                <input
+                  id="comentario"
+                  type="text"
+                  class="form-control"
+                  placeholder="<%= texts.view.priv %>"
+                  aria-label="<%= texts.view.priv %>"
+                  aria-describedby="comentar"
+                />
+                <button class="btn btn-info" type="button" id="comentar">
+                  <%= texts.view.enviar %>
+                </button>
+              </div>
+              <hr />
+              <div class="row">
+                <!-- <div class="col-2 d-flex">
+                  <img
+                    src="img/default_user.png"
+                    width="48x"
+                    height="48px"
+                    class="justify-content-center"
+                  />
+                </div> -->
+                <div class="col-12" id="comments">
+                  Seleccione un alumno para ver los comentarios.
+                  <!-- <b><%= texts.create.group.nombre %></b>
+                  <small class="text-muted">21-abr</small><br />
+                  <p><%= texts.view.comentarios %></p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="table"
+      data-Report="<%= table_report %>"
+      data-Eval="<%= table_eval %>"
+    ></div>
+    <%- include('scripts') %>
+    <script src="js/coordinador/settings.js"></script>
+    <script src="js/coordinador/viewRep.js"></script>
+    <script src="js/coordinador/mostrar.js"></script>
+    <script src="js/coordinador/comentar.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.querySelector('a[id="nav-visualizar"]').classList.add("active");
+    </script>
+  </body>
+</html>

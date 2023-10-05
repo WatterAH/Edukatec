@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <h1 class="text-white">
+        <img class="img" src="img/logo.png" width="50px" />Minerva
+      </h1>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link fs-6" href="home_teach"
+            ><i
+              class="fa-solid fa-house fa-bounce"
+              style="color: #fff"
+              id="house"
+            ></i
+            >Inicio</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link fs-6 dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            ><i
+              class="fa-regular fa-pen-to-square fa-bounce"
+              style="color: #fff"
+              id="pencil"
+            >
+            </i
+            >Crear</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="reporteP">Reporte parcial</a>
+            <a class="dropdown-item" href="reporteA">Reporte adicional</a>
+            <a class="dropdown-item" href="evaluacion">Evaluación</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link fs-6 dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            ><i
+              class="fa-regular fa-eye fa-bounce"
+              style="color: #fff"
+              id="eye"
+            ></i
+            >Visualizar</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="Mver_reportesP">Reporte parcial</a>
+            <a class="dropdown-item" href="Mver_reportesA">Reporte adicional</a>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex" action="logout" method="get">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item fs-6">
+            <a class="nav-link" href="Mmyaccout">Mi cuenta</a>
+          </li>
+
+          <li class="nav-item"></li>
+        </ul>
+
+        <button class="btn btn-danger my-2 my-sm-0 fs-6" type="submit">
+          Cerrar sesión
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+<br /><br /><br /><br /><br /><br />
+
+<script>
+  var path = window.location.pathname;
+  var link = document.querySelector("a[href=" + path.slice(1) + "]");
+  if (link) {
+    link.classList.add("active");
+  }
+</script>

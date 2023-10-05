@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <!--Visualizar registos-->
+    <title>Edukatec | Reportes parciales</title>
+    <style>
+      body {
+        /* background-image: linear-gradient(315deg, #fff1eb 0%, #bbe5e3 100%); */
+        background-color: #bbe5e3;
+        background-repeat: no-repeat;
+        .fa-regular,
+        .fa-solid {
+          margin-right: 0.3em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <div class="card mb-3">
+            <h3 class="card-header">
+              <div class="row">
+                <div class="col-3">
+                  <select class="form-select" id="hijos">
+                    <option value="">Hijos</option>
+                    <% for (i=0; i < hijos.length; i++) { %>
+                    <option value="<%= hijos[i].id %>">
+                      <%= hijos[i].name %> <%= hijos[i].spaterno %>
+                    </option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <select class="form-select" id="periodos">
+                    <% for(i=1; i <=5; i++) { %>
+                    <option value="<%= i %>">Periodo <%= i %></option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <select class="form-select" id="reportes">
+                    <option value="<%= parcial %>">Reporte Parcial</option>
+                    <option value="<%= adicional %>">Reporte Adicional</option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-danger float-end" id="pdf">
+                    <i
+                      class="fa-regular fa-file-pdf fa-xl ms-2"
+                      style="color: #fff"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </h3>
+            <div class="card-text">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h4>Lenguaje y comunicación</h4>
+                  <p class="notes mx-3 my-2" id="notes1">
+                    Selecciona uno de tus hijos y un tipo de reporte.
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Pensamiento matemático</h4>
+                  <p class="notes mx-3 my-2" id="notes2">
+                    Selecciona uno de tus hijos y un tipo de reporte.
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Exploración y comprensión del mundo natural y social</h4>
+                  <p class="notes mx-3 my-2" id="notes3">
+                    Selecciona uno de tus hijos y un tipo de reporte.
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Artes</h4>
+                  <p class="notes mx-3 my-2" id="notes4">
+                    Selecciona uno de tus hijos y un tipo de reporte.
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Inglés</h4>
+                  <p class="notes mx-3 my-2" id="notes5">
+                    Selecciona uno de tus hijos y un tipo de reporte.
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Educación física</h4>
+                  <p class="notes mx-3 my-2" id="notes6">
+                    Selecciona uno de tus hijos y un tipo de reporte.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+    <!--  -->
+    <script src="js/padre/viewRep.js"></script>
+    <%- include('scripts') %>
+  </body>
+</html>

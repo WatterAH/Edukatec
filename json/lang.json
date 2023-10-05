@@ -1,0 +1,277 @@
+{
+  "es": {
+    "inicio": "Inicio",
+    "home": {
+      "buscar": "Buscar",
+      "grupos": "Grupos",
+      "gruposnt": "No hay grupos",
+      "alumnosnt": "No hay alumnos",
+      "evaluacionesnt": "Ninguna evaluación emitida",
+      "noTitle": "Sin título",
+      "noAddInfo": "Sin información adicional"
+    },
+    "asignar": "Asignar",
+    "assign": {
+      "grupoNC": "Aún no has creado ningún grupo",
+      "empieza": "¡Empieza aquí!",
+      "eliminar": "Eliminar",
+      "maestroNA": "Ningún maestro asignado",
+      "maestroNC": "Aún no has creado ningún maestro"
+    },
+    "crear": "Crear",
+    "create": {
+      "maestro": "Maestro",
+      "teacher": {
+        "crearM": "Crear maestro",
+        "mail": "Correo electrónico",
+        "codigos": "Códigos",
+        "eliminar": "Eliminar",
+        "codigosnt": "No hay nada para mostrar"
+      },
+      "grupo": "Grupo",
+      "group": {
+        "crearG": "Crear grupo",
+        "nombre": "Nombre"
+      },
+      "alumno": "Alumno",
+      "student": {
+        "crearA": "Crear alumno",
+        "nombres": "Nombre(s)",
+        "apellidoP": "Apellido paterno",
+        "apellidoM": "Apellido materno",
+        "error": "Hubo un error",
+        "archivo": "Subir archivo",
+        "plantilla": "Plantilla para alumnos",
+        "carga": "Para cargas masivas"
+      },
+      "padre": "Padre",
+      "parent": {
+        "crearP": "Crear padre",
+        "hijos": "Hijos"
+      }
+    },
+    "visualizar": "Ver",
+    "view": {
+      "parcial": "Reporte parcial",
+      "parciales": "Reportes parciales",
+      "adicional": "Reporte adicional",
+      "adicionales": "Reportes adicionales",
+      "nombre": "Nombre del alumno",
+      "mat1": "Lenguaje y comunicación",
+      "mat2": "Pensamiento matemático",
+      "mat3": "Exploración y comprensión del mundo natural y social",
+      "mat4": "Artes",
+      "mat5": "Educación física",
+      "mat6": "Inglés",
+      "comentarios": "Comentarios",
+      "priv": "Comentario privado",
+      "enviar": "Enviar",
+      "grupos": "Todos",
+      "alumno": "Alumno"
+    },
+    "cuenta": "Mi cuenta",
+    "account": {
+      "bienvenido": "Bienvenido",
+      "nombre": "NOMBRE COMPLETO: ",
+      "mail": "CORREO: ",
+      "cuenta": "TIPO DE CUENTA: ",
+      "pass": "Cambiar contraseña",
+      "fotoC": "Cambiar foto",
+      "fotoE": "Eliminar foto",
+      "coordinador": "Coordinador"
+    },
+    "config": "Configuración",
+    "settings": {
+      "config": "CONFIGURACIÓN",
+      "periodo": "Periodo actual:",
+      "ciclo": "Ciclo actual:",
+      "idioma": "Idioma:",
+      "modo": "Modo:",
+      "oscuro": "Oscuro",
+      "claro": "Claro"
+    }
+  },
+  "en": {
+    "inicio": "Home",
+    "home": {
+      "buscar": "Search",
+      "grupos": "Groups",
+      "gruposnt": "No groups",
+      "alumnosnt": "No students",
+      "evaluacionesnt": "No evaluations emitted yet",
+      "noTitle": "No title",
+      "noAddInfo": "No additional information"
+    },
+    "asignar": "Assign",
+    "assign": {
+      "grupoNC": "You haven't created any group yet",
+      "empieza": "Create one here!",
+      "eliminar": "Delete",
+      "maestroNA": "No teacher assigned yet",
+      "maestroNC": "You haven't created any teacher yet"
+    },
+    "crear": "Create",
+    "create": {
+      "maestro": "Teacher",
+      "teacher": {
+        "crearM": "Create teacher",
+        "mail": "Email address",
+        "codigos": "Codes",
+        "eliminar": "Delete",
+        "codigosnt": "No codes to show yet"
+      },
+      "grupo": "Group",
+      "group": {
+        "crearG": "Create group",
+        "nombre": "Name"
+      },
+      "alumno": "Student",
+      "student": {
+        "crearA": "Create student",
+        "nombres": "Name",
+        "apellidoP": "Middle name",
+        "apellidoM": "Lastname",
+        "error": "There was an error",
+        "archivo": "Upload file",
+        "plantilla": "Students' template",
+        "carga": "For massive upload"
+      },
+      "padre": "Parent",
+      "parent": {
+        "crearP": "Create parent",
+        "hijos": "Children"
+      }
+    },
+    "visualizar": "View",
+    "view": {
+      "parcial": "Partial report",
+      "parciales": "Partial reports",
+      "nombre": "Student name",
+      "mat1": "Communication",
+      "mat2": "Mathematical thinking",
+      "mat3": "World exploration and understandment",
+      "mat4": "Arts",
+      "mat5": "P. E.",
+      "mat6": "English",
+      "adicional": "Additional report",
+      "comentarios": "Comments",
+      "priv": "Private comment",
+      "enviar": "Send",
+      "grupos": "All",
+      "alumno": "Student"
+    },
+    "cuenta": "My account",
+    "account": {
+      "bienvenido": "Welcome",
+      "nombre": "NAME: ",
+      "mail": "EMAIL: ",
+      "cuenta": "ACCOUNT TYPE: ",
+      "pass": "Change password",
+      "fotoC": "Change picture",
+      "fotoE": "Delete picture",
+      "coordinador": "Coordinator"
+    },
+    "config": "Settings",
+    "settings": {
+      "config": "SETTINGS",
+      "periodo": "Current period:",
+      "ciclo": "Current term:",
+      "idioma": "Language:",
+      "modo": "Mode:",
+      "oscuro": "Dark",
+      "claro": "Light"
+    }
+  },
+  "pt": {
+    "inicio": "Início",
+    "home": {
+      "buscar": "Pesquisar",
+      "grupos": "Grupos",
+      "gruposnt": "Sem grupos",
+      "alumnosnt": "Sem alunos",
+      "evaluacionesnt": "Sem evaluações emitidas",
+      "noTitle": "Sem titulo",
+      "noAddInfo": "Sem informação adicional"
+    },
+    "asignar": "Atribuir",
+    "assign": {
+      "grupoNC": "Ainda não criou nenhum grupo",
+      "empieza": "Começa aqui!",
+      "eliminar": "Apagar",
+      "maestroNA": "Nenhum professor atribuído",
+      "maestroNC": "Ainda não criou nenhum professor"
+    },
+    "crear": "Criar",
+    "create": {
+      "maestro": "Professor",
+      "teacher": {
+        "crearM": "Criar professor",
+        "mail": "Correio eletrônico",
+        "codigos": "Códigos",
+        "eliminar": "Apagar",
+        "codigosnt": "Sem códigos para exibir"
+      },
+      "grupo": "Grupo",
+      "group": {
+        "crearG": "Criar grupo",
+        "nombre": "Nome"
+      },
+      "alumno": "Aluno",
+      "student": {
+        "crearA": "Criar aluno",
+        "nombres": "Nome(s)",
+        "apellidoP": "Sobrenome materno",
+        "apellidoM": "Sobrenome paterno",
+        "error": "Houve um erro",
+        "archivo": "Enviar arquivo",
+        "plantilla": "Modelo para alumnos",
+        "carga": "Para uploads em massa"
+      },
+      "padre": "Pai",
+      "parent": {
+        "crearP": "Criar pai",
+        "hijos": "Filhos"
+      }
+    },
+    "visualizar": "Olhar",
+    "view": {
+      "parcial": "Relatório parcial",
+      "parciales": "Relatórios parciais",
+      "adicional": "Relatório adicional",
+      "adicionales": "Relatórios adicionais",
+      "nombre": "Nome do aluno",
+      "mat1": "Linguagem y comunicação",
+      "mat2": "Pensamento matemático",
+      "mat3": "Exploração y compreensão do mundo natural e social",
+      "mat4": "Artes",
+      "mat5": "Educação física",
+      "mat6": "Inglês",
+      "comentarios": "Comentários",
+      "priv": "Comentário privado",
+      "enviar": "Enviar",
+      "grupos": "Todos",
+      "alumno": "Aluno"
+    },
+    "cuenta": "Minha conta",
+    "account": {
+      "bienvenido": "Boas-vindas",
+      "nombre": "NOME COMPLETO: ",
+      "mail": "CORREIO: ",
+      "cuenta": "TIPO DE CONTA: ",
+      "pass": "Alterar senha",
+      "fotoC": "Alterar foto",
+      "fotoE": "Apagar foto",
+      "coordinador": "Coordenador"
+    },
+    "config": "Configurações",
+    "settings": {
+      "config": "CONFIGURAÇÕES",
+      "periodo": "Periodo atual:",
+      "ciclo": "Ciclo atual:",
+      "idioma": "Linguagem:",
+      "modo": "Modo:",
+      "oscuro": "Escuro",
+      "claro": "Claro"
+    }
+  }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+
+    <title>Minerva | Inicio de sesión</title>
+    <style>
+      body {
+        background-color: #bbe5e3;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23f4bd61' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23b92327' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23f5af61' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23c42d2d' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23f6a160' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23ce3733' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23f69260' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23d94139' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23f7845f' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23e34b3f' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23f8765f' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23ee5545' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+      }
+
+      .bg-card {
+        background-color: #eed7c5;
+      }
+    </style>
+    <title>Edukatec | Inicio de sesión</title>
+  </head>
+
+  <body>
+    <div data-aos="fade-right" data-aos-duration="1800" class="text-center">
+      <a href="/"><img src="img/logo.png" width="10%" /></a>
+    </div>
+    <div
+      id="uno"
+      data-aos="fade-right"
+      data-aos-duration="2000"
+      class="container my-auto"
+    >
+      <div class="row">
+        <div class="col-sm-1 col-md-2"></div>
+        <div class="col-sm-10 col-md-8">
+          <div class="row">
+            <div class="col-xs-0 col-lg-1"></div>
+            <div class="col-xs-12 col-lg-10">
+              <div class="card mb-3">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-10 card-body">
+                    <br />
+                    <h4 class="card-title text-center">Regístrate</h4>
+                    <form action="/register" method="post">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label class="form-label mt-4" for="name"
+                            >Nombre</label
+                          >
+                          <input
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'name') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="name"
+                            name="name"
+                            value="<% if (typeof validaciones !='undefined' || typeof code_error != 'undefined') { %><%= valores.name %><%}%>"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label class="form-label mt-4" for="lastname"
+                            >Apellido</label
+                          >
+                          <input
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'lastname') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="lastname"
+                            name="lastname"
+                            value="<% if (typeof validaciones !='undefined' || typeof code_error != 'undefined') { %><%= valores.lastname %><%}%>"
+                          />
+                        </div>
+                        <div class="form-group col-md-12">
+                          <label class="form-label mt-4" for="mail"
+                            >Correo electrónico</label
+                          >
+                          <input
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'mail') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="mail"
+                            name="mail"
+                            value="<% if (typeof validaciones !='undefined' || typeof code_error != 'undefined') { %><%= valores.mail %><%}%>"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="pass" class="form-label mt-4"
+                            >Contraseña</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'pass') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="pass"
+                            name="pass"
+                            value="<% if (typeof validaciones !='undefined' || typeof code_error != 'undefined') { %><%= valores.pass %><%}%>"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="left"
+                            data-bs-original-title="Mínimo 7 caractéres, una mayúscula, una minúscula, un número y un símbolo"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="pass2" class="form-label mt-4"
+                            >Confirmar contraseña</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'pass') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="pass2"
+                            name="pass2"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label class="form-label mt-4" for="code"
+                            >Código</label
+                          >
+                          <input
+                            class="form-control <% if (typeof validaciones !='undefined' || typeof code_error != 'undefined') { %> <% if (typeof validaciones != 'undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'code') { %> is-invalid <% } %> <% }) %> <% } else if (typeof code_error != 'undefined') { %> is-invalid <% } %> <% } %>"
+                            id="code"
+                            name="code"
+                            aria-describedby="codeHelp"
+                            maxlength="10"
+                            value="<% if (typeof validaciones !='undefined' || typeof code_error != 'undefined') { %><%= valores.code %><%}%>"
+                            onkeyup="codigo()"
+                          />
+                          <% if (typeof code_error !='undefined' ) { %>
+                          <small id="codeHelp" class="text-danger">
+                            Codigo incorrecto
+                          </small>
+                          <% } else { %>
+                          <small id="codeHelp" class="form-text text-muted">
+                            Solicítalo con tu coordinador
+                          </small>
+                          <% } %>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="type" class="form-label mt-4"
+                            >Tipo de maestro</label
+                          >
+                          <select
+                            class="form-select <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'type') { %> is-invalid <% } %> <% }) %> <% } %>"
+                            id="type"
+                            name="type"
+                          >
+                            <option value="1">General</option>
+                            <option value="2">Inglés</option>
+                            <option value="3">Educación Física</option>
+                          </select>
+                        </div>
+                        <div class="form-check my-3 ms-2">
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            value=""
+                            id="terminos"
+                          />
+                          <label for="terminos" class="flexCheckDefault"
+                            >Acepto los
+                            <a href="/terminos"
+                              >términos y condiciones</a
+                            ></label
+                          >
+                        </div>
+                        <button class="btn btn-primary mx-auto text-center">
+                          Enviar
+                        </button>
+                      </div>
+                    </form>
+                    <p class="float-end">
+                      <a href="/login"><br />¿Ya tienes cuenta?</a>
+                    </p>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/prism.js"></script>
+    <script src="https://bootswatch.com/_assets/js/custom.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

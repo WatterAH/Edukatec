@@ -1,0 +1,30 @@
+<script
+  src="https://kit.fontawesome.com/0b552e7f2c.js"
+  crossorigin="anonymous"
+></script>
+<script>
+  var path = window.location.pathname;
+  var link = document.querySelector("a[href=" + path.slice(1) + "]");
+  if (link) {
+    link.classList.add("active");
+  }
+</script>
+<script>
+  const house = document.getElementById("house");
+  const pencil = document.getElementById("pencil");
+  const eye = document.getElementById("eye");
+  const person = document.getElementById("person");
+  window.onload = setTimeout(() => {
+    house.classList.remove("fa-bounce");
+    pencil.classList.remove("fa-bounce");
+    eye.classList.remove("fa-bounce");
+    person.classList.remove("fa-bounce");
+  }, 1000);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://bootswatch.com/_vendor/prismjs/prism.js"></script>
+<script src="js/server/custom.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>

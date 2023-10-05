@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!-- Formulario para registar maestro, alumno y grupo -->
+    <title>Minerva | <%= texts.create.group.crearG %></title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-1 col-xl-2"></div>
+        <div class="col-lg-10 col-xl-8">
+          <!-- Maestro -->
+          <div class="card mb-3">
+            <h3 class="card-header text-center">
+              <%= texts.create.group.crearG %>
+            </h3>
+            <div class="card-text mx-5" id="group">
+              <br />
+              <form method="post" action="/register_g" accept-charset="utf-8">
+                <div class="row">
+                  <div class="form-group col-md-10 mx-5">
+                    <label class="col-form-label mt-4" for="gname">
+                      <%= texts.create.group.nombre %>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="group"
+                      id="gname"
+                    />
+                  </div>
+                </div>
+                <p><br /></p>
+                <button class="btn btn-success float-end" id="send">
+                  <%= texts.crear %>
+                </button>
+                <p><br /><br /></p>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-0 col-lg-1 col-xl-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <% if (typeof message !='undefined' ) { %>
+          <div class="alert alert-dismissible alert-primary" id="message">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+            ></button>
+            <strong><%= message %></strong>
+            <br />
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script>
+      document.querySelector('a[id="nav-crear"]').classList.add("active");
+    </script>
+  </body>
+</html>

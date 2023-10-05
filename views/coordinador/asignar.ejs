@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <title>Minerva | <%= texts.asignar %></title>
+    <%- include('links.ejs') %>
+    <style>
+      .maestro {
+        cursor: move;
+      }
+
+      .fas {
+        cursor: move;
+        margin-right: 0.3em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div class="card mb-3">
+            <p></p>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-4">
+                <% if (grupos.length == 0) { %> <%= texts.assign.grupoNC %>
+                <a href="register_g"><%= texts.assign.empieza %></a>
+                <% } else { %> <% for (i=0; i < grupos.length; i++) { %>
+                <div class="card bg-warning mb-3">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item dropdown ms-auto">
+                      <a
+                        class="nav-link active dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        role="button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      ></a>
+                      <div class="dropdown-menu">
+                        <% var maestro = false %> <% for (j=0; j <
+                        asignacion.length; j++) { %> <% if
+                        (asignacion[j].id_grupo == descifrar(grupos[i].id)) { %>
+                        <% maestro = true %>
+                        <p class="dropdown-item-sec">
+                          <%= asignacion[j].name %> <%= asignacion[j].lastname
+                          %>
+                          <br />
+                          <!-- Botón para eliminar profe -->
+                          <button
+                            class="btn btn-sm btn-danger float-start"
+                            onclick="borrar('<%= asignacion[j].id_maestro %>', '<%= grupos[i].id %>')"
+                          >
+                            <%= texts.assign.eliminar %>
+                          </button>
+                        </p>
+
+                        <!-- Rayita para separar profes -->
+                        <div class="dropdown-divider"></div>
+                        <% } %> <% } %> <% if (!maestro) { %>
+                        <p class="dropdown-item-sec">
+                          <%= texts.assign.maestroNA %>
+                        </p>
+                        <% } %>
+                      </div>
+                    </li>
+                  </ul>
+                  <p
+                    class="card-body text-center mb-4 me-3 ms-3 fs-5"
+                    id="<%= grupos[i].id %>"
+                  >
+                    <%= grupos[i].name %>
+                  </p>
+                </div>
+                <% } %> <% } %>
+              </div>
+              <div class="col-sm-2"></div>
+              <div class="col-sm-4">
+                <div class="card bg-warning mb-3">
+                  <div class="card-text">
+                    <div class="mx-auto">
+                      <div
+                        class="row mx-3 mt-3 justify-content-center"
+                        id="lista-maestros"
+                      >
+                        <% if (maestros.length == 0) { %> <%=
+                        texts.assign.maestroNC %>
+                        <a href="register_m" class="text-center">
+                          <%= texts.assign.empieza %></a
+                        >
+                        <% } else { %> <% for (i=0; i < maestros.length; i++) {
+                        %>
+                        <div
+                          class="maestro col-12 card text-center justify-content-center mb-3"
+                          id="<%= maestros[i].id %>"
+                        >
+                          <p class="card-text fs-5">
+                            <i class="fas fa-grip-lines"></i><%=
+                            maestros[i].name %> <%= maestros[i].lastname %>
+                          </p>
+                        </div>
+                        <% } %> <% } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const maestros = document.getElementById('lista-maestros')
+      new Sortable(maestros, {
+          group: 'shared',
+          //handle: ".fas",
+          animation: 300,
+          easing: "cubic-bezier(0, 0.55, 0.45, 1)",
+          // chosenClass: "selected"
+      })
+      '<% for(i=0; i<grupos.length; i++) { %>'
+      const grupos_<%= i %> = document.getElementById('<%= grupos[i].id %>')
+      new Sortable(grupos_<%= i %>, {
+          group: 'shared',
+          animation: 300,
+          onAdd: (event) => {
+            const data = {
+              grupo: event.to.id,
+              maestro: event.item.id
+            }
+            return fetch("/assign", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }).then(response => {
+              if (!response.ok) {
+                response.text().then((text) => {
+                  Swal.fire({
+                    text: text,
+                    icon: "error",
+                  }).then(() => {
+                    location.reload()
+                  })
+                });
+              } else {
+                response.text().then((text) => {
+                  Swal.fire({
+                    text: text,
+                    icon: "success",
+                  }).then(() => {
+                    location.reload()
+                  })
+                });
+              }
+            })
+          },
+      })
+      '<% } %>'
+      const borrar = (maestro, grupo) => {
+        const data = {
+          maestro,
+          grupo
+        }
+        return fetch("/deleteAssign", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }).then(response => {
+          if (!response.ok) {
+            response.text().then((text) => {
+              Swal.fire({
+                text: text,
+                icon: "error",
+              }).then(() => {
+                location.reload()
+              })
+            });
+          } else {
+            response.text().then((text) => {
+              Swal.fire({
+                text: text,
+                icon: "success",
+              }).then(() => {
+                location.reload()
+              })
+            });
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

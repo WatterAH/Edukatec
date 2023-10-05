@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!-- Formulario para registar maestro, alumno y grupo -->
+    <title>Minerva | <%= texts.create.student.crearA %></title>
+    <%- include('links.ejs') %>
+    <style>
+      .file-input {
+        position: relative;
+        display: inline-block;
+      }
+      .file-input input[type="file"] {
+        position: absolute;
+        left: -9999px;
+      }
+      .file-input label {
+        display: inline-block;
+        padding: 5px 3px 7px 3px;
+        background-color: #f7f7f7;
+        border: 1px solid;
+        border-color: #6c757d;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .file-input .icon {
+        display: block;
+        text-align: center;
+        margin-left: 7px;
+      }
+      .file-input input[type="file"]::-webkit-file-upload-button {
+        visibility: hidden;
+      }
+      .file-input a {
+        color: #007129;
+      }
+      .file-input a:hover {
+        color: #2fb380;
+      }
+      .file-input a:active {
+        color: #212529;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-1 col-xl-2"></div>
+        <div class="col-lg-10 col-xl-8">
+          <!-- Maestro -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-md-7 my-auto">
+                  <h3 class="ms-3"><%= texts.create.student.crearA %></h3>
+                </div>
+                <form
+                  action="excelAlumnos"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="col-md-5"
+                >
+                  <div class="file-input">
+                    <a href="downloads/excelAlumnos.xlsx" download>
+                      <label
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        data-bs-original-title="Plantilla para alumnos"
+                      >
+                        <span class="icon">
+                          <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                        </span>
+                      </label>
+                    </a>
+                  </div>
+                  <div
+                    class="file-input"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    data-bs-original-title="Para cargas masivas"
+                  >
+                    <input
+                      type="file"
+                      id="ealumnos"
+                      name="file"
+                      accept=".xlsx"
+                    />
+                    <label for="ealumnos" class="">
+                      <a>
+                        <span class="icon">
+                          <i
+                            class="fa-sharp fa-regular fa-file-excel fa-xl"
+                            style="color: #007129"
+                          ></i>
+                        </span>
+                      </a>
+                    </label>
+                  </div>
+                  <input
+                    class="btn btn-info"
+                    type="submit"
+                    value="<%= texts.create.student.archivo %>"
+                  />
+                </form>
+              </div>
+            </div>
+            <div class="card-text form-group mx-5">
+              <div id="student">
+                <br />
+                <form method="post" action="/register_a" accept-charset="utf-8">
+                  <div class="row">
+                    <div class="form-group col-sm-8">
+                      <label class="form-label mt-4" for="sname">
+                        <%= texts.create.student.nombres %>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'sname') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="sname"
+                        id="sname"
+                        value="<% if (typeof validaciones != 'undefined') { %><%= valores.sname %><% } %>"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-6">
+                      <label class="form-label mt-4" for="spaterno">
+                        <%= texts.create.student.apellidoP %>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'spaterno') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="spaterno"
+                        id="spaterno"
+                        value="<% if (typeof validaciones != 'undefined') { %><%= valores.spaterno %><% } %>"
+                      />
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label class="form-label mt-4" for="smaterno">
+                        <%= texts.create.student.apellidoM %>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'smaterno') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        name="smaterno"
+                        id="smaterno"
+                        value="<% if (typeof validaciones != 'undefined') { %><%= valores.smaterno %><% } %>"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-6 col-md-4">
+                      <label class="form-label mt-4" for="sgrupo">
+                        <%= texts.create.grupo %>
+                      </label>
+                      <select
+                        class="form-select <% if (typeof validaciones !='undefined') { %> <% validaciones.forEach((id, index) => { %> <% if (validaciones[index].param == 'sgrupo') { %> is-invalid <% } %> <% }) %> <% } %>"
+                        id="sgrupo"
+                        name="sgrupo"
+                      >
+                        <option value="">Grupo</option>
+                        <% for (i=0; i < grupos.length; i++) { %>
+                        <option value="<%= grupos[i].id %>">
+                          <%= grupos[i].name %>
+                        </option>
+                        <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <button class="btn btn-success float-end mt-3" id="send">
+                    <%= texts.crear %>
+                  </button>
+                  <p><br /></p>
+                </form>
+                <p>
+                  <br />
+                </p>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-xl-2">
+          <% if (typeof message !='undefined' ) { %>
+          <div class="alert alert-dismissible alert-primary" id="message">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+            ></button>
+            <strong> <%= message %> </strong>
+            <br />
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script>
+      document.querySelector('a[id="nav-crear"]').classList.add("active");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Visualizar cuenta (para todos)-->
+    <title>Minerva | <%= texts.cuenta %></title>
+    <%- include('links.ejs') %>
+  </head>
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <h1><%= texts.account.bienvenido %> <%= data.name %></h1>
+      <div class="row">
+        <div class="col-12 col-lg-8 mt-5">
+          <div class="card bg-light mb-4">
+            <p class="card-text p-3 fs-5 ms-3">
+              <b><%= texts.account.nombre %></b> <%= data.name %> <%=
+              data.lastname %>
+            </p>
+          </div>
+          <div class="card bg-light my-4">
+            <p class="card-text p-3 fs-5 ms-3">
+              <b><%= texts.account.mail %></b> <%= data.mail %>
+            </p>
+          </div>
+          <div class="card bg-light my-4">
+            <p class="card-text p-3 fs-5 ms-3">
+              <b><%= texts.account.cuenta %></b> <%= texts.account.coordinador
+              %>
+            </p>
+          </div>
+          <button
+            class="btn btn-info ms-5 ms-md-0 mt-3 fs-5"
+            onclick="changePass()"
+          >
+            <%= texts.account.pass %>
+          </button>
+        </div>
+        <!-- <div class="col-12 col-lg-4 mt-5">
+          <div class="card bg-light py-5 mx-5">
+            <p class="card-text my-5 py-2 fs-5 text-center">
+              <i class="fa-solid fa-image fa-2xl" style="color: #004571"></i>
+            </p>
+          </div>
+          <div class="row mt-4 ms-4">
+            <div class="col-6 mt-2">
+              <button class="btn btn-sm btn-success text-black ms-1">
+                <%= texts.account.fotoC %>
+              </button>
+            </div>
+            <div class="col-6 mt-2">
+              <button class="btn btn-sm btn-success text-black me-4">
+                <%= texts.account.fotoE %>
+              </button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/coordinador/myacc.js"></script>
+  </body>
+</html>

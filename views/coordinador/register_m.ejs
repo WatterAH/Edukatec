@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!-- Formulario para registar maestro, alumno y grupo -->
+    <title>Minerva | <%= texts.create.teacher.crearM %></title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+          <!-- Maestro -->
+          <div class="card mb-3">
+            <h3 class="card-header text-center">
+              <%= texts.create.teacher.crearM %>
+            </h3>
+            <div class="card-text form-group row mx-5">
+              <div id="teacher">
+                <form method="post" action="/register_m" accept-charset="utf-8">
+                  <div class="form-group">
+                    <label class="col-form-label mt-4" for="tmail">
+                      <%= texts.create.teacher.mail %>
+                    </label>
+                    <input
+                      class="form-control <% if(typeof validaciones != 'undefined') {%>is-invalid<%}%>"
+                      name="tmail"
+                      id="tmail"
+                      value="<% if(typeof validaciones != 'undefined') {%><%=valores.mail%><%}%>"
+                    />
+                  </div>
+                  <p></p>
+                  <button class="btn btn-success float-end" id="send">
+                    <%= texts.crear %>
+                  </button>
+                </form>
+                <p class="text-danger"><br /><br /></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <h3 class="card-header text-center">
+              <%= texts.create.teacher.codigos %>
+            </h3>
+            <ul class="list-group list-group-flush">
+              <% if (codes.length==0) { %>
+              <li class="list-group-item">
+                <%= texts.create.teacher.codigosnt %>
+              </li>
+              <% } %> <% for (i=0; i< codes.length; i++) { %>
+              <form action="deleteCode" method="post">
+                <li class="list-group-item">
+                  <%= codes[i].code %>
+                  <button
+                    class="btn btn-danger btn-sm float-end"
+                    value="<%= codes[i].code %>"
+                    name="code"
+                  >
+                    <%= texts.create.teacher.eliminar %>
+                  </button>
+                </li>
+              </form>
+              <% } %>
+            </ul>
+          </div>
+          <% if (typeof message !='undefined' ) { %>
+          <div class="alert alert-dismissible alert-primary" id="message">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+            ></button>
+            <strong> <%= message %> </strong>
+            <br />
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script>
+      document.querySelector('a[id="nav-crear"]').classList.add("active");
+    </script>
+  </body>
+</html>

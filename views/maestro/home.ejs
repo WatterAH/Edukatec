@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Visualizar registos-->
+    <title>Minerva | Grupos</title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <% if (param == "grupos") { %> <% if (entidades.length == 0) { %>
+      <div class="row d-flex justify-content-center">
+        <h1 class="text-center">Ningún grupo asignado</h1>
+      </div>
+      <% } else { %>
+      <div class="row d-flex justify-content-center">
+        <h1 class="text-center">Grupos</h1>
+      </div>
+      <br />
+      <div id="resultados" class="row">
+        <% for (i=0; i < entidades.length; i++) { %>
+        <div
+          class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+          data-aos="fade-down"
+          data-aos-duration="<%= (i + 1) * 150 %>"
+        >
+          <a href="#" onclick="searchIn('<%= entidades[i].id %>')">
+            <div class="card bg-warning mb-3">
+              <h4 class="card-text text-center">
+                <br /><br />
+                <%= entidades[i].name %><br />
+                <br /><br />
+              </h4>
+            </div>
+          </a>
+        </div>
+        <% } %>
+      </div>
+      <% } %> <% } else if (param == "alumnos") { %> <% if (entidades.length ==
+      0) { %>
+      <div class="row d-flex justify-content-center">
+        <h1 class="text-center">Ningún alumno asignado</h1>
+      </div>
+      <% } else { %><% for (i=0; i < entidades.length; i++) { %>
+      <div class="col-sm-6 col-lg-4 col-xl-3" id="resultados">
+        <a>
+          <div
+            class="card bg-warning"
+            data-aos="fade-down"
+            data-aos-duration="<%= (i + 1) * 150 %>"
+            onclick="searchIn('<%= entidades[i].id %>')"
+          >
+            <div class="card-body text-center mb-3">
+              <img
+                src="img/alumno.png"
+                widht="150px"
+                height="150px"
+                class="mb-1"
+              /><br />
+              <strong>
+                <%= entidades[i].name %> <%= entidades[i].spaterno %> <%=
+                entidades[i].smaterno %><br />
+              </strong>
+            </div>
+          </div>
+        </a>
+      </div>
+      <% } %> <% } %> <% } else { %>
+      <div class="row">
+        <% if (entidades.length == 0) { %>
+        <div class="row d-flex justify-content-center">
+          <h1 class="text-center">Sin evaluaciones emitidas</h1>
+        </div>
+        <% } else { %> <% for (i=0; i < entidades.length; i++) { %>
+        <div class="col-md-6 col-lg-4">
+          <a>
+            <div class="card mb-3">
+              <div class="card-header">
+                <h4>
+                  <%= entidades[i].date %><br />
+                  <%= !entidades[i].title ? "Sin título" : entidades[i].title %>
+                </h4>
+              </div>
+              <p class="card-text mt-2 ms-3 me-3 mb-2">
+                <%= !entidades[i].notes ? "Sin información adicional" :
+                entidades[i].notes %>
+              </p>
+            </div>
+          </a>
+        </div>
+        <% } %> <% } %> <% } %>
+      </div>
+    </div>
+    <form action="/entidadesM" method="post" id="form">
+      <input
+        id="param"
+        name="param"
+        value="<%= param %>"
+        type="text"
+        style="display: none; visibility: hidden"
+      />
+      <input
+        id="id"
+        name="id"
+        type="text"
+        style="display: none; visibility: hidden"
+      />
+    </form>
+    <%-include('scripts') %>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script>
+      document.querySelector('a[id="nav-inicio"]').classList.add("active");
+      function searchIn(id) {
+        const entidad = document.getElementById("id");
+        entidad.value = id;
+        document.getElementById("form").submit();
+      }
+      const grupos = document.getElementById("resultados");
+      new Sortable(grupos, {
+        animation: 300,
+        group: "shared",
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<script
+  src="https://kit.fontawesome.com/0b552e7f2c.js"
+  crossorigin="anonymous"
+></script>
+<script>
+  var path = window.location.pathname;
+  var link = document.querySelector("a[href=" + path.slice(1) + "]");
+  if (link) {
+    link.classList.add("active");
+  }
+</script>
+<script src="js/padre/pass.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  const house = document.getElementById("house");
+  const key = document.getElementById("key");
+  const eye = document.getElementById("eye");
+  window.onload = setTimeout(() => {
+    house.classList.remove("fa-bounce");
+    key.classList.remove("fa-bounce");
+    eye.classList.remove("fa-bounce");
+  }, 1000);
+</script>

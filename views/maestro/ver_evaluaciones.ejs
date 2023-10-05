@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <!--Visualizar registos-->
+    <title>Edukatec | Evaluaciones</title>
+    <style>
+      body {
+        /* background-image: linear-gradient(315deg, #fff1eb 0%, #bbe5e3 100%); */
+        background-color: #bbe5e3;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1 col-lg-2"></div>
+        <div class="col-sm-10 col-lg-8">
+          <!-- empieza for each para grupos -->
+          <div class="row d-flex justify-content-center">
+            <h1 class="text-center">Grupo -- Reporte Adicional</h1>
+          </div>
+          <br />
+          <!-- empieza for each para alumnos -->
+          <div class="row">
+            <div class="col-sm-6">
+              <a>
+                <div class="card mb-3">
+                  <h4 class="card-header">
+                    <svg
+                      class="float-end"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      version="1.1"
+                      width="20%"
+                      height="20%"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8C16.3,8 17,8.7 17,9.5M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.23 12,15.23C13.25,15.23 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z"
+                      />
+                    </svg>
+                    FECHA<br />
+                    Título
+                  </h4>
+                  <p class="card-text mt-2 ms-3 me-3 mb-2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Aliquam rhoncus nisi eget cursus consequat. Suspendisse
+                    feugiat arcu ut auctor vehicula. Sed eu odio nec metus
+                    faucibus sagittis. Cras non ex.
+                  </p>
+                </div>
+              </a>
+            </div>
+            <!-- termina for each para alumnos -->
+          </div>
+          <!-- termina for each para grupos -->
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

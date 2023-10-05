@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Visualizar cuenta (para todos)-->
+    <title>Minerva | <%= texts.config %></title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <h1><%= texts.settings.config %></h1>
+      <div class="row">
+        <div class="col-sm-6 pt-5 mt-4">
+          <div class="card bg-light">
+            <div class="card-text row p-3 mt-4">
+              <div class="col-5 fs-5 ms-5 mb-4">
+                <%= texts.settings.periodo %> <%= periodos ? periodos : ''%><br />
+              </div>
+              <div class="col-5 form-group">
+                <% if (!periodos) { %>
+                <form id="periodo" action="/periodo" method="post">
+                  <select
+                    class="form-select bg-warning"
+                    name="periodo"
+                    onchange="confirm()"
+                    id="periodos"
+                  >
+                    <option value="">Seleccione periodo</option>
+                    <% for(i=1; i <= 5; i++) { %>
+                    <option value="<%= i %>">Periodo <%= i %></option>
+                    <% } %>
+                  </select>
+                </form>
+                <% } %>
+              </div>
+              <div class="col-5 fs-5 ms-5 mb-4">
+                <%= texts.settings.ciclo %><br />
+              </div>
+              <div class="col-5 form-group">
+                <form action="" method="post">
+                  <select
+                    class="form-select bg-warning"
+                    id="ciclo"
+                    name="ciclo"
+                  ></select>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 pt-5 mt-4">
+          <div class="card bg-light">
+            <div class="card-text row p-3 mt-4">
+              <div class="col-5 fs-5 ms-5 mb-4">
+                <%= texts.settings.idioma %>
+              </div>
+              <div class="col-5 form-group">
+                <form id="lang" action="config_lang" method="post">
+                  <select
+                    class="form-select bg-warning"
+                    onchange="send()"
+                    name="lang"
+                  >
+                    <% for (i=0; i < langs.length; i++) { %>
+                    <option value="<%= langs[i].value %>" <%= (selected === langs[i].value) ? 'selected': '' %>>
+                      <%= langs[i].name %>
+                    </option>
+                    <% } %>
+                  </select>
+                </form>
+              </div>
+              <div class="col-5 fs-5 ms-5 mb-4">
+                <%= texts.settings.modo %>
+              </div>
+              <div class="col-5 form-group">
+                <form action="/config_theme" method="post" id="tema">
+                  <select
+                    class="form-select bg-warning"
+                    name="tema"
+                    onchange="temaa()"
+                  >
+                    <% for (i=0; i < temas.length; i++) { %>
+                    <option value="<%= temas[i].value %>" <%= (tema === temas[i].value) ? 'selected': '' %>>
+                      <%= temas[i].name %>
+                    </option>
+                    <% } %>
+                  </select>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('scripts') %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/coordinador/settings.js"></script>
+  </body>
+</html>

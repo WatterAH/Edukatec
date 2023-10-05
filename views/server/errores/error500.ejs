@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>500 | Error interno</title>
+    <style>
+      .page-wrap {
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <div class="page-wrap d-flex flex-row align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12 text-center">
+            <span class="display-1 d-block">Error <%= err.errno %></span>
+            <div class="mb-4 lead">¡Calma! El servidor sigue de pie.</div>
+            <div class="mb-4 lead"><%= err.sqlMessage %></div>
+            <a
+              href="#"
+              onclick="history.back(); return false;"
+              class="btn btn-link"
+              >Regresar</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

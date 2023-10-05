@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <!--Visualizar registos-->
+    <title>Edukatec | Alumnos</title>
+    <style>
+      body {
+        /* background-image: linear-gradient(315deg, #fff1eb 0%, #bbe5e3 100%); */
+        background-color: #bbe5e3;
+        background-repeat: no-repeat;
+      }
+      .fa-regular,
+      .fa-solid {
+        margin-right: 0.3em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div id="resultados" class="row">
+        <% hijos.forEach((hijo) => { %>
+        <div class="col-sm-6 col-lg-4 col-xl-3">
+          <div class="card bg-warning">
+            <div class="card-header text-center">
+              <img
+                src="img/alumno.png"
+                widht="150px"
+                height="150px"
+                class="mb-1"
+              /><br />
+              <strong>
+                <%= hijo.name %> <%= hijo.spaterno %> <%= hijo.smaterno %><br />
+              </strong>
+            </div>
+            <div class="card-text mx-3 mt-4 mb-4">
+              <ul class="list-group-warning list-group-flush">
+                <li class="list-group-item"><b>Grupo:</b> <%= hijo.grupo %></li>
+                <li class="list-group-item"><b>Profesores</b></li>
+                <li class="list-group-item">
+                  <b>General:</b> Gabriela Villegas
+                </li>
+                <li class="list-group-item">
+                  <b>Inglés:</b> Gabriela Villegas
+                </li>
+                <li class="list-group-item">
+                  <b>Educación Física:</b> Gabriela Villegas
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include('scripts') %>
+  </body>
+</html>

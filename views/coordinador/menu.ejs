@@ -1,0 +1,123 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <h1 class="text-white">
+        <img class="img" src="img/logo.png" width="50px" />Minerva
+      </h1>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link fs-6" href="home_coord" id="nav-inicio"
+            ><i
+              class="fa-solid fa-house fa-bounce"
+              style="color: #fff"
+              id="house"
+            ></i
+            ><%= texts.inicio %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6" href="asignar" id="nav-asignar"
+            ><i
+              class="fa-solid fa-chalkboard-user fa-bounce"
+              style="color: #fff"
+              id="person"
+            ></i
+            ><%= texts.asignar %></a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link fs-6 dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            id="nav-crear"
+            ><i
+              class="fa-regular fa-pen-to-square fa-bounce"
+              style="color: #fff"
+              id="pencil"
+            >
+            </i
+            ><%= texts.crear %></a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="register_m"
+              ><%= texts.create.maestro %></a
+            >
+            <a class="dropdown-item" href="register_g"
+              ><%= texts.create.grupo %></a
+            >
+            <a class="dropdown-item" href="register_a"
+              ><%= texts.create.alumno %></a
+            >
+            <a class="dropdown-item" href="register_p"
+              ><%= texts.create.padre %></a
+            >
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link fs-6 dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            id="nav-visualizar"
+            ><i
+              class="fa-regular fa-eye fa-bounce"
+              style="color: #fff"
+              id="eye"
+            ></i
+            ><%= texts.visualizar %></a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="Cver_reportesP"
+              ><%= texts.view.parcial %></a
+            >
+            <a class="dropdown-item" href="Cver_reportesA"
+              ><%= texts.view.adicional %></a
+            >
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex" method="get" action="logout">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item dropdown fs-6">
+            <a
+              class="nav-link no-arrow-dropdown-toggle"
+              data-bs-toggle="dropdown"
+              role="button"
+              aria-haspop="true"
+              aria-expanded="false"
+              href="#"
+            >
+              <i class="fa-solid fa-gear fa-xl" style="color: #ffd43b"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="Cmyaccount"><%= texts.cuenta %></a>
+              <a class="dropdown-item" href="Csettings"><%= texts.config %></a>
+            </div>
+          </li>
+        </ul>
+        <button class="btn btn-danger my-2 my-sm-0 fs-6">Cerrar sesión</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<br /><br /><br /><br /><br /><br />

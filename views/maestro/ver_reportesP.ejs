@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/img/logo.ico" />
+    <!--Visualizar registos-->
+    <title>Minerva | Reportes parciales</title>
+    <%- include('links.ejs') %>
+  </head>
+
+  <body>
+    <div class="nav"><%- include('menu') %></div>
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <h1 class="text-center">Reporte parcial</h1>
+      </div>
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <div class="card mb-3">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-3">
+                  <select class="form-select" id="grupos">
+                    <option value="">Grupos</option>
+                    <% grupos.forEach((grupo) => { %>
+                    <option value="<%= grupo.id %>"><%= grupo.name %></option>
+                    <% }) %>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <select class="form-select" id="alumno">
+                    <option value="">Alumno</option>
+                    <% alumnos.forEach((alumno) => { %>
+                    <option value="<%= alumno.id %>">
+                      <%= alumno.name %> <%= alumno.spaterno %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+                <div class="col-6 mt-2" id="accepted"></div>
+              </div>
+            </div>
+            <div class="card-text">
+              <ul class="list-group list-group-flush">
+                <% if (type == 1) { %>
+                <li class="list-group-item">
+                  <h4>Lenguaje y comunicación</h4>
+                  <p class="notes mx-3 my-2" id="notes1">
+                    Selecciona un alumno, ¡aquí aparecerá lo que hayas escrito!
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Pensamiento matemático</h4>
+                  <p class="notes mx-3 my-2" id="notes2">
+                    Selecciona un alumno, ¡aquí aparecerá lo que hayas escrito!
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Exploración y comprensión del mundo natural y social</h4>
+                  <p class="notes mx-3 my-2" id="notes3">
+                    Selecciona un alumno, ¡aquí aparecerá lo que hayas escrito!
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4>Artes</h4>
+                  <p class="notes mx-3 my-2" id="notes4">
+                    Selecciona un alumno, ¡aquí aparecerá lo que hayas escrito!
+                  </p>
+                </li>
+                <% } else if (type == 2) { %>
+                <li class="list-group-item">
+                  <h4>Inglés</h4>
+                  <p class="notes mx-3 my-2" id="notes5">
+                    Selecciona un alumno, ¡aquí aparecerá lo que hayas escrito!
+                  </p>
+                </li>
+                <% } else if (type == 3) { %>
+                <li class="list-group-item">
+                  <h4>Educación física</h4>
+                  <p class="notes mx-3 my-2" id="notes6">
+                    Selecciona un alumno, ¡aquí aparecerá lo que hayas escrito!
+                  </p>
+                </li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+    <div
+      id="table"
+      data-Report="<%= table_report %>"
+      data-Eval="<%= table_eval %>"
+    ></div>
+    <%- include('scripts') %>
+    <script src="js/maestro/viewRepP.js"></script>
+    <script src="js/maestro/mostrar.js"></script>
+    <script src="js/maestro/grupos.js"></script>
+  </body>
+</html>
