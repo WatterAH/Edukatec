@@ -5,10 +5,6 @@ const bodyPraser = require("body-parser");
 const path = require("path");
 const imports = require("./routes/server/middlewares/imports");
 
-//VIEWS
-app.set("views", __dirname + "/views");
-app.set("view engine", "ejs");
-
 //USES
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyPraser.json());
@@ -17,6 +13,10 @@ app.use(imports);
 app.use((req, res) => {
   res.status(404).render("server/errores/error404");
 });
+
+//VIEWS
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
 
 //STARTING SERVER
 app.set("port", process.env.PORT || 8080);
