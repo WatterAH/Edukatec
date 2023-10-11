@@ -18,7 +18,7 @@ app.use((req, res) => {
 });
 
 //STARTING SERVER
-const port = process.env.PORT || 8080;
+app.set("port", process.env.PORT || 8080);
 app.listen(app.get("port"), () =>
-  console.log("Server started, go to http://localhost:" + port)
+  console.log("Server started, go to http://localhost:" + app.get("port"))
 );
