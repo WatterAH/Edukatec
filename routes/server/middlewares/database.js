@@ -3,20 +3,12 @@ const fs = require("fs");
 const mysql = require("mysql2");
 const database = "users";
 
-var config = {
-  host: "localhost",
-  user: "Watter",
-  password: "takemebacktola",
-  database: database,
-  port: 3306,
-};
-
 var data = {
   host: "localhost",
-  user: "root",
-  password: "n0m3l0",
+  user: "user_example",
+  password: "user_password",
   database: database,
-  port: 3308,
+  port: 3306,
 };
 
 var con = mysql.createConnection(config);
