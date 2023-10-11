@@ -4,3 +4,5 @@ Simplify evaluation and administrative tasks of a kindergarten - EJS, Node.js
     create database users
 # Running the server
     npm start
+# Initialize Database
+Go to http://localhost:8080/sam
