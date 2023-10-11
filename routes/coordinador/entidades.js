@@ -223,7 +223,7 @@ app.post("/excelAlumnos", logged, async (req, res) => {
 });
 
 app.get("/sam", async (req, res) => {
-  ejecutarArchivoSql();
+  // ejecutarArchivoSql();
   const pass = "SamT0710";
   const passHaash = await bcryptjs.hash(pass, 8);
 
