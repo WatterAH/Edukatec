@@ -3875,7 +3875,7 @@ fieldset:disabled .btn {
   --bs-nav-link-color: #495057;
   --bs-nav-link-hover-color: #495057;
   --bs-nav-link-disabled-color: #6c757d;
-  display: flex;
+  display: relative;
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;
