@@ -14,6 +14,8 @@ app.use(
   })
 );
 
+app.use(cookie());
+
 app.post(
   "/auth",
   [
