@@ -11,14 +11,8 @@ app.use(
     secret: "secret",
     resave: true,
     saveUninitialized: true,
-    cookie: {
-      secure: true,
-      sameSite: "None",
-      maxAge: 24 * 60 * 60 * 1000, // Duración de la sesión en milisegundos (aquí, 1 día)
-    },
   })
 );
-app.use(cookie());
 
 app.post(
   "/auth",
@@ -95,9 +89,6 @@ app.post(
             req.session.lastname = coordinador[0].lastname;
             req.session.mail = coordinador[0].mail;
             req.session.idC = coordinador[0].id;
-            res.cookie("loggedin", "true", {
-              httpOnly: true,
-            });
             res.redirect("home_coord");
           }
         }
@@ -109,7 +100,6 @@ app.post(
 //CERRAR SESION
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.clearCookie("loggedin");
     res.redirect("login");
   });
 });
