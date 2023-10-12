@@ -7,6 +7,7 @@ const imports = require("./routes/server/middlewares/imports");
 
 //USES
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "json")));
 app.use(bodyPraser.json());
 app.use(bodyPraser.urlencoded({ extended: true }));
 app.use(imports);
