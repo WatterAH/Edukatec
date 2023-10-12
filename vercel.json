@@ -16,10 +16,6 @@
             "dest": "/public/js/$1"
         },
         {
-            "src": "/images/(.*)",
-            "dest": "/public/images/$1"
-        },
-        {
             "src": "/downloads(.*)",
             "dest": "/public/downloads/$1"
         },
