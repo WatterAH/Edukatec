@@ -11,9 +11,13 @@ app.use(
     secret: "secret",
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      secure: true,
+      sameSite: "None",
+      maxAge: 24 * 60 * 60 * 1000, // Duración de la sesión en milisegundos (aquí, 1 día)
+    },
   })
 );
-
 app.use(cookie());
 
 app.post(
