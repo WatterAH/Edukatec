@@ -14,19 +14,10 @@ app.use(imports);
 app.use((req, res) => {
   res.status(404).render("server/errores/error404");
 });
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 
 //VIEWS
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
-app.set("trust proxy", 1); // Confía en el encabezado X-Forwarded-* del proxy
 
 //STARTING SERVER
 app.set("port", process.env.PORT || 8080);

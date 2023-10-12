@@ -6,15 +6,19 @@ const { con } = require("./middlewares/database");
 const { body, validationResult } = require("express-validator");
 const { renderError } = require("./middlewares/functions");
 
+app.set("trust proxy", 1);
+
+app.use(cookie());
 app.use(
   session({
     secret: "secret",
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      secure: true,
+    },
   })
 );
-
-app.use(cookie());
 
 app.post(
   "/auth",
