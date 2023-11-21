@@ -4,8 +4,7 @@ const {
   descifrar,
   cifrar,
   isAjax,
-  logged2,
-  languageM,
+  authRequired,
 } = require("../server/middlewares/functions");
 const { getReportID, hallExists } = require("../server/middlewares/helpers");
 const {
@@ -16,7 +15,7 @@ const {
 
 const app = require("express")();
 
-app.post("/entidadesM", logged2, async (req, res) => {
+app.post("/entidadesM", authRequired("maestro"), async (req, res) => {
   const id = descifrar(req.body.id);
   if (id === null) return res.redirect("home_teach");
   const param = req.body.param;

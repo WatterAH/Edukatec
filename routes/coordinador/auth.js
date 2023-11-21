@@ -1,13 +1,15 @@
 const app = require("express")();
 const { langs, temas } = require("../server/constantes");
+const { con } = require("../server/middlewares/database");
 const {
-  logged,
   language,
   renderError,
   showMessage,
   descifrar,
   cifrar,
   theme,
+  authRequired,
+  validateToken,
 } = require("../server/middlewares/functions");
 const {
   grupos,
@@ -18,7 +20,7 @@ const {
   alumnos,
 } = require("../server/middlewares/querys");
 
-app.get("/home_coord", logged, async (req, res) => {
+app.get("/home_coord", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/home", {
       entidades: await grupos(),
@@ -31,7 +33,7 @@ app.get("/home_coord", logged, async (req, res) => {
   }
 });
 
-app.get("/register_m", logged, async (req, res) => {
+app.get("/register_m", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/register_m", {
       message: showMessage(res, req),
@@ -44,7 +46,7 @@ app.get("/register_m", logged, async (req, res) => {
   }
 });
 
-app.get("/register_g", logged, (req, res) => {
+app.get("/register_g", authRequired("coordinador"), (req, res) => {
   res.render("coordinador/register_g", {
     message: showMessage(res, req),
     texts: language(req),
@@ -52,7 +54,7 @@ app.get("/register_g", logged, (req, res) => {
   });
 });
 
-app.get("/register_a", logged, async (req, res) => {
+app.get("/register_a", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/register_a", {
       grupos: await grupos(),
@@ -65,7 +67,7 @@ app.get("/register_a", logged, async (req, res) => {
   }
 });
 
-app.get("/register_p", logged, async (req, res) => {
+app.get("/register_p", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/register_p", {
       alumnos: await alumnos(),
@@ -79,7 +81,7 @@ app.get("/register_p", logged, async (req, res) => {
   }
 });
 
-app.get("/asignar", logged, async (req, res) => {
+app.get("/asignar", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/asignar", {
       grupos: await grupos(),
@@ -95,7 +97,7 @@ app.get("/asignar", logged, async (req, res) => {
   }
 });
 
-app.get("/Cver_reportesP", logged, async (req, res) => {
+app.get("/Cver_reportesP", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/ver_reportesP", {
       texts: language(req),
@@ -110,7 +112,7 @@ app.get("/Cver_reportesP", logged, async (req, res) => {
   }
 });
 
-app.get("/Cver_reportesA", logged, async (req, res) => {
+app.get("/Cver_reportesA", authRequired("coordinador"), async (req, res) => {
   try {
     res.render("coordinador/ver_reportesA", {
       texts: language(req),
@@ -125,20 +127,31 @@ app.get("/Cver_reportesA", logged, async (req, res) => {
   }
 });
 
-app.get("/Cmyaccount", logged, (req, res) => {
-  var data = {
-    name: req.session.name,
-    lastname: req.session.lastname,
-    mail: req.session.mail,
-  };
-  res.render("coordinador/myaccount", {
-    data: data,
-    texts: language(req),
-    theme: theme(req),
-  });
+app.get("/Cmyaccount", authRequired("coordinador"), async (req, res) => {
+  const token = await validateToken(req.cookies.token, "coordinador");
+  if (!token) {
+    return renderError(res, "No token specified");
+  }
+  con.query(
+    "SELECT * FROM coordinadores WHERE id = ?",
+    [token],
+    (err, coordinador) => {
+      if (err) return renderError(res, err);
+      var data = {
+        name: coordinador[0].name,
+        lastname: coordinador[0].lastname,
+        mail: coordinador[0].mail,
+      };
+      res.render("coordinador/myaccount", {
+        data: data,
+        texts: language(req),
+        theme: theme(req),
+      });
+    }
+  );
 });
 
-app.get("/Csettings", logged, async (req, res) => {
+app.get("/Csettings", authRequired("coordinador"), async (req, res) => {
   try {
     const selected = req.cookies.lang || "es";
     const tema = req.cookies.theme || "light";

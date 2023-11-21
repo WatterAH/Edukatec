@@ -4,7 +4,7 @@ const session = require("express-session");
 const cookie = require("cookie-parser");
 const { con } = require("./middlewares/database");
 const { body, validationResult } = require("express-validator");
-const { renderError, createAccessToken } = require("./middlewares/functions");
+const { renderError } = require("./middlewares/functions");
 
 app.set("trust proxy", 1);
 
@@ -69,36 +69,31 @@ app.post(
                           error: "Datos incorrectos",
                         });
                       } else {
-                        const token = await createAccessToken({
-                          id: padre[0].id,
-                          entity: "padre",
-                        });
-                        res.cookie("token", token);
                         req.session.loggedin3 = true;
                         req.session.idP = padre[0].id;
+                        req.session.mail = padre[0].mail;
                         req.session.idC = padre[0].id_coord;
                         res.redirect("home_parent");
                       }
                     }
                   );
                 } else {
-                  const token = await createAccessToken({
-                    id: maestro[0].id,
-                    entity: "maestro",
-                  });
-                  res.cookie("token", token);
+                  req.session.loggedin2 = true;
+                  req.session.name = maestro[0].name;
+                  req.session.lastname = maestro[0].lastname;
+                  req.session.mail = maestro[0].mail;
                   req.session.idM = maestro[0].id;
                   req.session.idC = maestro[0].id_coord;
+                  req.session.type = maestro[0].type;
                   res.redirect("home_teach");
                 }
               }
             );
           } else {
-            const token = await createAccessToken({
-              id: coordinador[0].id,
-              entity: "coordinador",
-            });
-            res.cookie("token", token);
+            req.session.loggedin = true;
+            req.session.name = coordinador[0].name;
+            req.session.lastname = coordinador[0].lastname;
+            req.session.mail = coordinador[0].mail;
             req.session.idC = coordinador[0].id;
             res.redirect("home_coord");
           }
@@ -110,8 +105,9 @@ app.post(
 
 //CERRAR SESION
 app.get("/logout", (req, res) => {
-  res.cookie("token", "", { expires: new Date() });
-  res.redirect("login");
+  req.session.destroy(() => {
+    res.redirect("login");
+  });
 });
 
 module.exports = app;

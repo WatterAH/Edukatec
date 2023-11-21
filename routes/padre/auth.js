@@ -1,13 +1,12 @@
 const app = require("express")();
 const {
-  logged3,
   renderError,
-  descifrar,
   cifrar,
+  authRequired,
 } = require("../server/middlewares/functions");
 const { hijos } = require("../server/middlewares/querys");
 
-app.get("/home_parent", logged3, async (req, res) => {
+app.get("/home_parent", authRequired("padre"), async (req, res) => {
   try {
     res.render("padre/home", { hijos: await hijos(req.session.idP, true) });
   } catch (err) {
@@ -15,7 +14,7 @@ app.get("/home_parent", logged3, async (req, res) => {
   }
 });
 
-app.get("/reportes", logged3, async (req, res) => {
+app.get("/reportes", authRequired("padre"), async (req, res) => {
   try {
     res.render("padre/reportes", {
       hijos: await hijos(req.session.idP, false),

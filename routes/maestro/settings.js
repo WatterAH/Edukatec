@@ -2,9 +2,9 @@ const app = require("express")();
 const bycriptjs = require("bcryptjs");
 const { con } = require("../server/middlewares/database");
 const { body, validationResult } = require("express-validator");
-const { logged2 } = require("../server/middlewares/functions");
+const { authRequired } = require("../server/middlewares/functions");
 
-app.post("/config_lang", logged2, async (req, res) => {
+app.post("/config_lang", authRequired("maestro"), async (req, res) => {
   const lang = req.body.lang;
   res.cookie("langM", lang, {
     httpOnly: true,
@@ -13,7 +13,7 @@ app.post("/config_lang", logged2, async (req, res) => {
   res.redirect("Csettings");
 });
 
-app.post("/config_theme", logged2, async (req, res) => {
+app.post("/config_theme", authRequired("maestro"), async (req, res) => {
   const theme = req.body.tema;
   res.cookie("themeM", theme, {
     httpOnly: true,
@@ -27,7 +27,7 @@ app.post(
     body("pass1").trim().isLength({ min: 1 }),
     body("pass2").trim().isLength({ min: 1 }),
   ],
-  logged2,
+  authRequired("maestro"),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

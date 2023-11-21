@@ -1,14 +1,16 @@
 const { grupos, alumnos } = require("../server/middlewares/querys");
 const {
-  logged2,
   renderError,
   cifrar,
+  authRequired,
+  validateToken,
 } = require("../server/middlewares/functions");
 const { langs, temas } = require("../server/constantes");
+const { con } = require("../server/middlewares/database");
 
 const app = require("express")();
 
-app.get("/home_teach", logged2, async (req, res) => {
+app.get("/home_teach", authRequired("maestro"), async (req, res) => {
   try {
     res.render("maestro/home", {
       entidades: await grupos(req.session.idM),
@@ -19,25 +21,32 @@ app.get("/home_teach", logged2, async (req, res) => {
   }
 });
 
-app.get("/Mmyaccout", logged2, async (req, res) => {
+app.get("/Mmyaccout", authRequired("maestro"), async (req, res) => {
   const selected = req.cookies.langM || "es";
   const tema = req.cookies.themeM || "light";
-  var data = {
-    name: req.session.name,
-    lastname: req.session.lastname,
-    mail: req.session.mail,
-    type: req.session.idM,
-  };
-  res.render("maestro/myaccount", {
-    data: data,
-    langs,
-    temas,
-    selected,
-    tema,
+  const token = await validateToken(req.cookies.token, "maestro");
+  if (!token) {
+    return renderError(res, "No token specified");
+  }
+  con.query("SELECT * FROM maestros WHERE id = ?", [token], (err, maestro) => {
+    if (err) return renderError(res, err);
+    var data = {
+      name: maestro[0].name,
+      lastname: maestro[0].lastname,
+      mail: maestro[0].mail,
+      type: maestro[0].idM,
+    };
+    res.render("maestro/myaccount", {
+      data: data,
+      langs,
+      temas,
+      selected,
+      tema,
+    });
   });
 });
 
-app.get("/reporteP", logged2, async (req, res) => {
+app.get("/reporteP", authRequired("maestro"), async (req, res) => {
   try {
     res.render("maestro/reporteP", {
       type: req.session.type,
@@ -51,7 +60,7 @@ app.get("/reporteP", logged2, async (req, res) => {
   }
 });
 
-app.get("/reporteA", logged2, async (req, res) => {
+app.get("/reporteA", authRequired("maestro"), async (req, res) => {
   try {
     res.render("maestro/reporteA", {
       type: req.session.type,
@@ -65,14 +74,14 @@ app.get("/reporteA", logged2, async (req, res) => {
   }
 });
 
-app.get("/evaluacion", logged2, async (req, res) => {
+app.get("/evaluacion", authRequired("maestro"), async (req, res) => {
   res.render("maestro/evaluacion", {
     alumnos: await alumnos(req.session.idM),
     grupos: await grupos(req.session.idM),
   });
 });
 
-app.get("/Mver_reportesP", logged2, async (req, res) => {
+app.get("/Mver_reportesP", authRequired("maestro"), async (req, res) => {
   try {
     res.render("maestro/ver_reportesP", {
       grupos: await grupos(req.session.idM),
@@ -86,7 +95,7 @@ app.get("/Mver_reportesP", logged2, async (req, res) => {
   }
 });
 
-app.get("/Mver_reportesA", logged2, async (req, res) => {
+app.get("/Mver_reportesA", authRequired("maestro"), async (req, res) => {
   try {
     res.render("maestro/ver_reportesA", {
       grupos: await grupos(req.session.idM),

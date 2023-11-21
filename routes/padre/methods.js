@@ -1,8 +1,8 @@
 const {
-  logged3,
   isAjax,
   descifrar,
   query,
+  authRequired,
 } = require("../server/middlewares/functions");
 const { getReportID } = require("../server/middlewares/helpers");
 const { body, validationResult } = require("express-validator");
@@ -14,7 +14,7 @@ const app = require("express")();
 
 app.post(
   "/changePassP",
-  logged3,
+  authRequired("padre"),
   [
     body("pass1").trim().isLength({ min: 1 }),
     body("pass2").trim().isLength({ min: 1 }),

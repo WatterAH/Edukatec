@@ -2,13 +2,13 @@ const app = require("express")();
 const uuid = require("uuid");
 const bycriptjs = require("bcryptjs");
 const {
-  logged,
   sendMessage,
   descifrar,
   query,
   language,
   generateKey,
   theme,
+  authRequired,
 } = require("../server/middlewares/functions");
 const { transporter, options } = require("../server/middlewares/mail");
 const { body, validationResult } = require("express-validator");
@@ -17,7 +17,7 @@ const { con } = require("../server/middlewares/database");
 
 app.post(
   "/register_m",
-  logged,
+  authRequired("coordinador"),
   [body("tmail").isEmail().trim()],
   async (req, res) => {
     const errors = validationResult(req);
@@ -95,7 +95,7 @@ app.post(
       .trim()
       .matches(/^[a-zA-Z0-9-_]+$/),
   ],
-  logged,
+  authRequired("coordinador"),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -135,7 +135,7 @@ app.post(
 
 app.post(
   "/register_a",
-  logged,
+  authRequired("coordinador"),
   [
     body("sname")
       .trim()
@@ -215,7 +215,7 @@ app.post(
 app.post(
   "/register_p",
   [body("mail").trim().isEmail(), body("hijos").isLength({ min: 1 })],
-  logged,
+  authRequired("coordinador"),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

@@ -1,11 +1,11 @@
 const app = require("express")();
 const {
-  logged2,
   descifrar,
   cifrar,
   renderError,
   sendMessage,
   query,
+  authRequired,
 } = require("../server/middlewares/functions");
 const {
   getReportID,
@@ -18,7 +18,7 @@ const { con } = require("../server/middlewares/database");
 
 app.post(
   "/reporteP",
-  logged2,
+  authRequired("maestro"),
   [
     body("alumno").trim().isLength({ min: 1 }),
     body("notesp1")
@@ -115,7 +115,7 @@ app.post(
 
 app.post(
   "/reporteA",
-  logged2,
+  authRequired("maestro"),
   [
     body("alumno").trim().isLength({ min: 1 }),
     body("notesA1")
@@ -212,7 +212,7 @@ app.post(
 
 app.post(
   "/evaluacion",
-  logged2,
+  authRequired("maestro"),
   [
     body("alumno").trim().isLength({ min: 1 }),
     body("title")

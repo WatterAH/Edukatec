@@ -3,29 +3,41 @@ const crypto = require("crypto");
 const { con } = require("./database");
 const clave = crypto.randomBytes(32);
 const iv = crypto.randomBytes(16);
+const jwt = require("jsonwebtoken");
+// require("dotenv").config();
 
-const logged = (req, res, next) => {
-  if (!req.session.loggedin) {
-    res.render("server/login", { error: "Debes Iniciar Sesión" });
-    return;
-  }
-  next();
+const createAccessToken = (payload) => {
+  return new Promise((resolve, reject) => {
+    jwt.sign(payload, process.env.SECRET, { expiresIn: "1d" }, (err, token) => {
+      if (err) reject(err);
+      resolve(token);
+    });
+  });
 };
 
-const logged2 = (req, res, next) => {
-  if (!req.session.loggedin2) {
-    res.render("server/login", { error: "Debes Iniciar Sesión" });
-    return;
-  }
-  next();
+const authRequired = (entity) => (req, res, next) => {
+  validateToken(req.cookies.token, entity)
+    .then((token) => next())
+    .catch((error) =>
+      res.render("server/login", { error: "Debes Iniciar Sesión" })
+    );
 };
 
-const logged3 = (req, res, next) => {
-  if (!req.session.loggedin3) {
-    res.render("server/login", { error: "Debes Iniciar Sesión" });
-    return;
-  }
-  next();
+const validateToken = (token, entity) => {
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      reject(null);
+    }
+
+    jwt.verify(token, process.env.SECRET, (err, user) => {
+      if (err) {
+        reject(null);
+      } else if (user.entity != entity) {
+        reject(null);
+      }
+      resolve(user.id);
+    });
+  });
 };
 
 const isAjax = (req, res, next) => {
@@ -162,9 +174,6 @@ const generateKey = () => {
 };
 
 module.exports = {
-  logged,
-  logged2,
-  logged3,
   language,
   query,
   renderError,
@@ -175,4 +184,7 @@ module.exports = {
   isAjax,
   generateKey,
   theme,
+  createAccessToken,
+  authRequired,
+  validateToken,
 };

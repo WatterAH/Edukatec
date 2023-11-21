@@ -4,19 +4,19 @@ const path = require("path");
 const xlsx = require("xlsx");
 const fileUpload = require("express-fileupload");
 const {
-  logged,
   descifrar,
   sendMessage,
   query,
   language,
   cifrar,
   theme,
+  authRequired,
 } = require("../server/middlewares/functions");
 const { con, ejecutarArchivoSql } = require("../server/middlewares/database");
 
 app.use(fileUpload());
 
-app.post("/entidades", logged, async (req, res) => {
+app.post("/entidades", authRequired, async (req, res) => {
   const id = descifrar(req.body.id);
   if (id === null) return res.redirect("home_coord");
   const param = req.body.param;
@@ -48,7 +48,7 @@ app.post("/entidades", logged, async (req, res) => {
   }
 });
 
-app.post("/assign", logged, async (req, res) => {
+app.post("/assign", authRequired("coordinador"), async (req, res) => {
   const maestro = descifrar(req.body.maestro);
   const grupo = descifrar(req.body.grupo);
   if (grupo === null || maestro === null)
@@ -78,7 +78,7 @@ app.post("/assign", logged, async (req, res) => {
   );
 });
 
-app.post("/deleteAssign", logged, async (req, res) => {
+app.post("/deleteAssign", authRequired("coordinador"), async (req, res) => {
   const maestro = descifrar(req.body.maestro);
   const grupo = descifrar(req.body.grupo);
   if (maestro === null || grupo == null) {
@@ -94,7 +94,7 @@ app.post("/deleteAssign", logged, async (req, res) => {
   }
 });
 
-app.post("/aprobarRep", logged, async (req, res) => {
+app.post("/aprobarRep", authRequired("coordinador"), async (req, res) => {
   const id = descifrar(req.body.id);
   const table = descifrar(req.body.table_report);
   if (id === null || table === null)
@@ -109,7 +109,7 @@ app.post("/aprobarRep", logged, async (req, res) => {
   );
 });
 
-app.post("/desaprobarRep", logged, async (req, res) => {
+app.post("/desaprobarRep", authRequired("coordinador"), async (req, res) => {
   const id = descifrar(req.body.id);
   const table = descifrar(req.body.table_report);
   if (id === null || table === null)
@@ -124,7 +124,7 @@ app.post("/desaprobarRep", logged, async (req, res) => {
   );
 });
 
-app.post("/deleteCode", logged, async (req, res) => {
+app.post("/deleteCode", authRequired("coordinador"), async (req, res) => {
   const code = req.body.code;
   con.query("DELETE FROM maestros WHERE code = ?", code, async (err) => {
     if (err) return sendMessage(res, "Ocurrió un error", "register_m", err);
@@ -132,7 +132,7 @@ app.post("/deleteCode", logged, async (req, res) => {
   });
 });
 
-app.post("/excelAlumnos", logged, async (req, res) => {
+app.post("/excelAlumnos", authRequired("coordinador"), async (req, res) => {
   if (!req.files || !req.files.file)
     return sendMessage(res, "Ingresa un archivo", "register_a");
   const file = req.files.file;
