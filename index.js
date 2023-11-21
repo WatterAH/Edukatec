@@ -20,7 +20,7 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
 //STARTING SERVER
-app.set("port", process.env.PORT || 8080);
+app.set("port", process.env.PORT || 3000);
 app.listen(app.get("port"), () =>
   console.log("Server started, go to http://localhost:" + app.get("port"))
 );
