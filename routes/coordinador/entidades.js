@@ -16,7 +16,7 @@ const { con, ejecutarArchivoSql } = require("../server/middlewares/database");
 
 app.use(fileUpload());
 
-app.post("/entidades", authRequired, async (req, res) => {
+app.post("/entidades", authRequired("coordinador"), async (req, res) => {
   const id = descifrar(req.body.id);
   if (id === null) return res.redirect("home_coord");
   const param = req.body.param;

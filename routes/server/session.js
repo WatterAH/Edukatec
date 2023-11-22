@@ -75,7 +75,9 @@ app.post(
                           idC: padre[0].id_coord,
                           mai: padre[0].mail,
                         });
-                        res.cookie("token", token);
+                        res.cookie("token", token, {
+                          maxAge: "1d",
+                        });
                         res.redirect("home_parent");
                       }
                     }
@@ -90,7 +92,9 @@ app.post(
                     mail: maestro[0].mail,
                     type: maestro[0].type,
                   });
-                  res.cookie("token", token);
+                  res.cookie("token", token, {
+                    maxAge: "1d",
+                  });
                   res.redirect("home_teach");
                 }
               }
@@ -103,7 +107,9 @@ app.post(
               lastname: coordinador[0].lastname,
               mail: coordinador[0].mail,
             });
-            res.cookie("token", token);
+            res.cookie("token", token, {
+              maxAge: "1d",
+            });
             res.redirect("home_coord");
           }
         }
