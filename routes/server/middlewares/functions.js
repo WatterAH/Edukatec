@@ -4,7 +4,6 @@ const { con } = require("./database");
 const clave = crypto.randomBytes(32);
 const iv = crypto.randomBytes(16);
 const jwt = require("jsonwebtoken");
-// require("dotenv").config();
 
 const createAccessToken = (payload) => {
   return new Promise((resolve, reject) => {
