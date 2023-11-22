@@ -76,7 +76,7 @@ app.post(
                           mai: padre[0].mail,
                         });
                         res.cookie("token", token, {
-                          maxAge: "1d",
+                          maxAge: 315360000,
                         });
                         res.redirect("home_parent");
                       }
@@ -93,7 +93,7 @@ app.post(
                     type: maestro[0].type,
                   });
                   res.cookie("token", token, {
-                    maxAge: "1d",
+                    maxAge: 315360000,
                   });
                   res.redirect("home_teach");
                 }
@@ -108,7 +108,7 @@ app.post(
               mail: coordinador[0].mail,
             });
             res.cookie("token", token, {
-              maxAge: "1d",
+              maxAge: 315360000,
             });
             res.redirect("home_coord");
           }
