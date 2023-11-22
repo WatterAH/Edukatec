@@ -9,13 +9,6 @@ var con = mysql.createPool({
   connectionLimit: 10,
 });
 
-con.connect((err) => {
-  if (err) {
-    return console.log(err);
-  }
-  console.log("Successful connection with '" + process.env.DB + "'");
-});
-
 const ejecutarArchivoSql = () => {
   const contenidoSql = fs.readFileSync("./database/db.sql", "utf-8");
   const consultas = contenidoSql
