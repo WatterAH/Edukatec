@@ -222,17 +222,22 @@ app.post("/excelAlumnos", authRequired("coordinador"), async (req, res) => {
   );
 });
 
-app.get("/sam", async (req, res) => {
-  // ejecutarArchivoSql();
-  const pass = "SamT0710";
+/* CHANGE CONSTANTS TO CREATE A TEACHER AND COORDINATOR EXAMPLE */
+
+app.get("/initialize", async (req, res) => {
+  ejecutarArchivoSql();
+  const pass = "YourPass";
+  const mail = "somemail@gmail.com";
+  const name = "yourname";
+  const lastname = "yourlastname";
   const passHaash = await bcryptjs.hash(pass, 8);
 
   con.query(
     "INSERT INTO coordinadores SET ?",
     {
-      name: "Samuel",
-      lastname: "Tlahuel",
-      mail: "samueltlahuel.m@gmail.com",
+      name,
+      lastname,
+      mail,
       pass: passHaash,
     },
     async (err) => {
@@ -243,9 +248,9 @@ app.get("/sam", async (req, res) => {
           "INSERT INTO maestros SET ?",
           {
             id_coord: 1,
-            name: "Gabriela",
-            lastname: "Villegas",
-            mail: "villegas.garcia.gabriela11@gmail.com",
+            name,
+            lastname,
+            mail,
             pass: passHaash,
             type: 1,
           },
