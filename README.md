@@ -10,4 +10,4 @@ Create an .env file and configure your mysql database credentials as well as a s
 # Initialize Database
 Got to routes/coordinador/entidades.js
 and follow the instructions at line 225
-then go to http://localhost:8080/sam
+then go to http://localhost:3000/sam
