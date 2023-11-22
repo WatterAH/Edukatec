@@ -1,6 +1,10 @@
 const app = require("express")();
 const { con } = require("../server/middlewares/database");
-const { query, authRequired } = require("../server/middlewares/functions");
+const {
+  query,
+  authRequired,
+  validateToken,
+} = require("../server/middlewares/functions");
 const { body, validationResult } = require("express-validator");
 const bycriptjs = require("bcryptjs");
 
@@ -36,7 +40,8 @@ app.post(
       const pass1 = req.body.pass1;
       const pass2 = req.body.pass2;
       const passHaash = await bycriptjs.hash(pass2, 8);
-      const mail = req.session.mail;
+      const token = await validateToken(req.cookies.token, "coordinador");
+      const mail = token.mail;
       con.query(
         "SELECT * FROM coordinadores WHERE mail = ?",
         [mail],

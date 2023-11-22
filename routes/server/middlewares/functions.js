@@ -35,7 +35,7 @@ const validateToken = (token, entity) => {
       } else if (user.entity != entity) {
         reject(null);
       }
-      resolve(user.id);
+      resolve(user);
     });
   });
 };

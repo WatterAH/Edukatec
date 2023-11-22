@@ -129,26 +129,16 @@ app.get("/Cver_reportesA", authRequired("coordinador"), async (req, res) => {
 
 app.get("/Cmyaccount", authRequired("coordinador"), async (req, res) => {
   const token = await validateToken(req.cookies.token, "coordinador");
-  if (!token) {
-    return renderError(res, "No token specified");
-  }
-  con.query(
-    "SELECT * FROM coordinadores WHERE id = ?",
-    [token],
-    (err, coordinador) => {
-      if (err) return renderError(res, err);
-      var data = {
-        name: coordinador[0].name,
-        lastname: coordinador[0].lastname,
-        mail: coordinador[0].mail,
-      };
-      res.render("coordinador/myaccount", {
-        data: data,
-        texts: language(req),
-        theme: theme(req),
-      });
-    }
-  );
+  var data = {
+    name: token.name,
+    lastname: token.lastname,
+    mail: token.mail,
+  };
+  res.render("coordinador/myaccount", {
+    data: data,
+    texts: language(req),
+    theme: theme(req),
+  });
 });
 
 app.get("/Csettings", authRequired("coordinador"), async (req, res) => {

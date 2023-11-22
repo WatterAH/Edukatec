@@ -1,7 +1,7 @@
 const { con } = require("../server/middlewares/database");
 const { format } = require("date-fns");
 const { getReportID, hallExists } = require("../server/middlewares/helpers");
-const { descifrar } = require("../server/middlewares/functions");
+const { descifrar, validateToken } = require("../server/middlewares/functions");
 const { comments } = require("../server/middlewares/querys");
 const { body } = require("express-validator");
 
@@ -20,13 +20,9 @@ app.post("/commentM", [body("txt").trim()], async (req, res) => {
   let month = format(fecha, "MMM");
   let day = fecha.getDate();
   let date = day + "-" + month;
+  const token = await validateToken(req.cookies.token, "maestro");
 
-  let id_pattern = await hallExists(
-    type,
-    reportID,
-    req.session.idC,
-    req.session.idM
-  );
+  let id_pattern = await hallExists(type, reportID, token.idC, token.id);
   if (!txt) {
     const comentarios = await comments(id_pattern);
     return res.send(JSON.stringify(comentarios));

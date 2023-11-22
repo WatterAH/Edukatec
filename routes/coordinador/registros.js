@@ -9,6 +9,7 @@ const {
   generateKey,
   theme,
   authRequired,
+  validateToken,
 } = require("../server/middlewares/functions");
 const { transporter, options } = require("../server/middlewares/mail");
 const { body, validationResult } = require("express-validator");
@@ -35,6 +36,7 @@ app.post(
       const mail = req.body.tmail;
       const code = uuid.v4().substring(1, 11);
       const mailOptions = options(code, mail);
+      const token = await validateToken(req.cookies.token, "coordinador");
 
       con.query(
         "SELECT * FROM maestros WHERE mail = ?",
@@ -59,7 +61,7 @@ app.post(
                 con.query(
                   "INSERT INTO maestros SET ?",
                   {
-                    id_coord: req.session.idC,
+                    id_coord: token.id,
                     mail,
                     code,
                   },
@@ -242,6 +244,7 @@ app.post(
       });
       const pass = generateKey();
       const passHaash = await bycriptjs.hash(pass, 8);
+      const token = await validateToken(req.cookies.token, "coordinador");
       console.log(pass);
       con.query(
         "SELECT * FROM maestros WHERE mail = ?",
@@ -280,7 +283,7 @@ app.post(
                   con.query(
                     "INSERT INTO padres SET ?",
                     {
-                      id_coord: req.session.idC,
+                      id_coord: token.id,
                       mail: mail,
                       pass: passHaash,
                     },

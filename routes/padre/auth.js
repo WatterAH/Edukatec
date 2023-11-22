@@ -3,12 +3,14 @@ const {
   renderError,
   cifrar,
   authRequired,
+  validateToken,
 } = require("../server/middlewares/functions");
 const { hijos } = require("../server/middlewares/querys");
 
 app.get("/home_parent", authRequired("padre"), async (req, res) => {
   try {
-    res.render("padre/home", { hijos: await hijos(req.session.idP, true) });
+    const token = await validateToken(req.cookies.token, "padre");
+    res.render("padre/home", { hijos: await hijos(token.id, true) });
   } catch (err) {
     renderError(res, err);
   }
@@ -16,8 +18,9 @@ app.get("/home_parent", authRequired("padre"), async (req, res) => {
 
 app.get("/reportes", authRequired("padre"), async (req, res) => {
   try {
+    const token = await validateToken(req.cookies.token, "padre");
     res.render("padre/reportes", {
-      hijos: await hijos(req.session.idP, false),
+      hijos: await hijos(token.id, false),
       parcial: cifrar("reporte_parcial"),
       adicional: cifrar("reporte_adicional"),
     });

@@ -3,6 +3,7 @@ const {
   descifrar,
   query,
   authRequired,
+  validateToken,
 } = require("../server/middlewares/functions");
 const { getReportID } = require("../server/middlewares/helpers");
 const { body, validationResult } = require("express-validator");
@@ -27,7 +28,8 @@ app.post(
       const pass1 = req.body.pass1;
       const pass2 = req.body.pass2;
       const passHaash = await bcryptjs.hash(pass2, 8);
-      const mail = req.session.mail;
+      const token = await validateToken(req.cookies.token, "padre");
+      const mail = token.mail;
       con.query(
         "SELECT * FROM padres WHERE mail = ?",
         [mail],

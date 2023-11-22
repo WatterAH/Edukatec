@@ -5,6 +5,7 @@ const {
   cifrar,
   isAjax,
   authRequired,
+  validateToken,
 } = require("../server/middlewares/functions");
 const { getReportID, hallExists } = require("../server/middlewares/helpers");
 const {
@@ -47,7 +48,8 @@ app.get("/reporteM", isAjax, async (req, res) => {
   const alumno = descifrar(req.query.alumno);
   const table_report = descifrar(req.query.report);
   const table_eval = descifrar(req.query.eval);
-  const type = req.session.type;
+  const token = await validateToken(req.cookies.token, "maestro");
+  const type = token.type;
   if (alumno == null || table_report == null || table_eval == null) {
     return res.send(JSON.stringify(""));
   }
@@ -64,8 +66,9 @@ app.get("/reporteM", isAjax, async (req, res) => {
 
 app.get("/alumnosGrupo", isAjax, async (req, res) => {
   const grupo = descifrar(req.query.grupo);
+  const token = await validateToken(req.cookies.token, "maestro");
   if (grupo === null) {
-    const estudiantes = await alumnos(req.session.idM);
+    const estudiantes = await alumnos(token.id);
     return res.send(JSON.stringify(estudiantes));
   }
   const get = await query("SELECT * FROM alumnos WHERE grupo = ?", grupo);
@@ -81,9 +84,10 @@ app.get("/recuperar", isAjax, async (req, res) => {
   const alumno = descifrar(req.query.alumno);
   const table_report = descifrar(req.query.report);
   const table_eval = descifrar(req.query.eval);
-  const id_coord = req.session.idC;
-  const type = req.session.type;
-  const id_teach = req.session.idM;
+  const token = await validateToken(req.cookies.token, "maestro");
+  const id_coord = token.idC;
+  const type = token.type;
+  const id_teach = token.id;
   //VALIDAR CIFRADO
   if (alumno === null || table_report === null || table_eval === null) {
     return res.send(JSON.stringify(""));

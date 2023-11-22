@@ -70,36 +70,40 @@ app.post(
                         });
                       } else {
                         const token = await createAccessToken({
-                          id: padre[0].id,
                           entity: "padre",
+                          id: padre[0].id,
+                          idC: padre[0].id_coord,
+                          mai: padre[0].mail,
                         });
                         res.cookie("token", token);
-                        req.session.loggedin3 = true;
-                        req.session.idP = padre[0].id;
-                        req.session.idC = padre[0].id_coord;
                         res.redirect("home_parent");
                       }
                     }
                   );
                 } else {
                   const token = await createAccessToken({
-                    id: maestro[0].id,
                     entity: "maestro",
+                    id: maestro[0].id,
+                    idC: maestro[0].id_coord,
+                    name: maestro[0].name,
+                    lastname: maestro[0].lastname,
+                    mail: maestro[0].mail,
+                    type: maestro[0].type,
                   });
                   res.cookie("token", token);
-                  req.session.idM = maestro[0].id;
-                  req.session.idC = maestro[0].id_coord;
                   res.redirect("home_teach");
                 }
               }
             );
           } else {
             const token = await createAccessToken({
-              id: coordinador[0].id,
               entity: "coordinador",
+              id: coordinador[0].id,
+              name: coordinador[0].name,
+              lastname: coordinador[0].lastname,
+              mail: coordinador[0].mail,
             });
             res.cookie("token", token);
-            req.session.idC = coordinador[0].id;
             res.redirect("home_coord");
           }
         }

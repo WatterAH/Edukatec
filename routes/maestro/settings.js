@@ -2,7 +2,10 @@ const app = require("express")();
 const bycriptjs = require("bcryptjs");
 const { con } = require("../server/middlewares/database");
 const { body, validationResult } = require("express-validator");
-const { authRequired } = require("../server/middlewares/functions");
+const {
+  authRequired,
+  validateToken,
+} = require("../server/middlewares/functions");
 
 app.post("/config_lang", authRequired("maestro"), async (req, res) => {
   const lang = req.body.lang;
@@ -36,7 +39,8 @@ app.post(
       const pass1 = req.body.pass1;
       const pass2 = req.body.pass2;
       const passHaash = await bycriptjs.hash(pass2, 8);
-      const mail = req.session.mail;
+      const token = await validateToken(req.cookies.token, "maestro");
+      const mail = token.mail;
       con.query(
         "SELECT * FROM maestros WHERE mail = ?",
         [mail],
