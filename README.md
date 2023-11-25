@@ -5,6 +5,8 @@ Create an .env file and configure your mysql database credentials as well as a s
 ![Screenshoot of a .env file](./public/img/env.png)
 # Database MySQL
 `create database users`
+# Install Packages
+`npm install`
 # Running the server
 `npm run dev`
 # Initialize Database
